@@ -1,0 +1,4 @@
+Simulation parameters
+
+0.1	Psi
+0.1	Pir
