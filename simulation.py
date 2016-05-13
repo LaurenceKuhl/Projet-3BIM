@@ -10,17 +10,17 @@ class simulation:
             content = f.readlines()
             for i in range(len(content)):
                 content[i]=content[i].split("\t")[0]
-            self.Psi=content[2]
-            self.Pir=content[3]
+            self.Psi=float(content[2])
+            self.Pir=float(content[3])
 
 
-#Ps, Pi et Pr fixent les probabilités initiales d'être infecté initialement,
+#Ps, Pi et Pr fixent les probabilites initiales d'etre infecte initialement,
 #est-ce utile ?
-#Psi = Proba qu'un sain devienne infecté
-#Pir = Proba qu'un infecté devienne résistant
+#Psi = Proba qu'un sain devienne infecte
+#Pir = Proba qu'un infecté devienne resistant
 
 
 print '##### PROJET 3BIM - INSA Lyon - Bosc, Greugny, Jaouen, Kuhlburger #####'
 simulation("SimulationParameters.txt")
 worldmap=city('Population.csv')
-print worldmap.infection()
+worldmap.infection()
