@@ -2,3 +2,6 @@ Simulation parameters
 
 0.1	Psi
 0.1	Pir
+0.1	PvoyageS	Probabilité de prendre un avion dans la journée pour chaque habitant S
+0.1	PvoyageI	Probabilité de prendre un avion dans la journée pour chaque habitant I
+0.1	PvoyageR	Probabilité de prendre un avion dans la journée pour chaque habitant R

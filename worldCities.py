@@ -1,33 +1,39 @@
+# -*- coding: utf-8 -*-
 import numpy as np
 import random
 import math
 import csv
 #import simulation
 
+
 class worldCities:
     
-    def __init__(self,field):     
-				
-				##### Recuperation des donnees des villes #####
-        with open(field,'rb') as file: #Lecture du fichier
+    #####################################################################################
+    ################# Definition of all the cities and their parameters #################
+    ##################################################################################### 
+    def __init__(self,fieldPop,fieldFly):
+        
+	#####Recuperation des donnees des villes #####
+        with open(fieldPop,'rb') as file: #Lecture du fichier
             contents = csv.reader(file)
             pop = list()
             for row in contents:
-								pop.append(row)        
-                
+		pop.append(row)        
+                                
             for i in xrange(0,3): #Supprimer les 4 premieres et 3 dernieres lignes
                 pop.pop(0)
                 pop.pop(-1)
             pop.pop(0)
 
             for i in xrange(len(pop)): #Separation du tableau pop
-							for j in xrange(1,6):
-								pop[i].append(float(pop[i][0].split(";")[j]))
-							pop[i].append(pop[i][0].split(";")[6])
-							pop[i][0]=pop[i][0].split(";")[0]
-							#Faut-il fermer le fichier
+                for j in xrange(1,6):
+                    pop[i].append(float(pop[i][0].split(";")[j]))
+                pop[i].append(pop[i][0].split(";")[6])
+                pop[i][0]=pop[i][0].split(";")[0]
+                #Faut il fermer le fichier
 
-						#Creation de tableaux de noms
+
+	   #Creation de tableaux de noms, indices, populations... dont les lignes correspondent aux differentes villes
             self.name=[]
             self.indice=[]
             self.population=[]
@@ -37,43 +43,132 @@ class worldCities:
             self.density=[]
             self.area=[]
             for i in xrange(len(pop)):
-							self.name.append(pop[i][0])
-							self.indice.append(pop[i][1])
-							self.population.append(pop[i][3])
-							self.S.append(self.population[i])
-							self.I.append(0)
-							self.R.append(0)
-							self.density.append(pop[i][5])
-							self.area.append((self.S[i]+self.I[i]+self.R[i])/self.density[i]) #Peut etre inutile
-							print "Ville : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i]
+		self.name.append(pop[i][0])
+		self.indice.append(int(pop[i][1])-1)
+		self.population.append(pop[i][3])
+		self.S.append(self.population[i])
+		self.I.append(0)
+		self.R.append(0)
+		self.density.append(pop[i][5])
+		self.area.append((self.S[i]+self.I[i]+self.R[i])/self.density[i]) #Peut etre inutile
+		#print "Ville a t0 : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i]
+	    self.nbrCities=len(self.name)
+	
+	
+	##### Import airplane flies matrix #####
+        with open(fieldFly,'rb') as file:
+            contents = csv.reader(file)
+            self.fly = list()
+            for row in contents:
+                self.fly.append(row)
+            
+            for i in xrange(0,4):
+                self.fly.pop(0)
+            
+            for i in xrange(len(self.fly)): #Separation du tableau pop
+                for j in xrange(1,self.nbrCities+2):
+                    temp=self.fly[i][0].split(";")[j]
+                    if (len(temp)!=0):
+                        self.fly[i].append(float(temp))
+                    else:
+                        self.fly[i].append(0) #Surcharge de memoire avec des 0, c'est inutile, reflechir a comment faire autrement
+                self.fly[i].pop(0)
+                self.fly[i].pop(0)
+        #Faut il fermer le fichier
 
-		##### Classe d'infection des populations au sein d'une meme ville, sans echange #####
+
+        ##### S'assurer du nombre de personnes constant en l"absence de naissances #####
+        worldPopulation=0
+        for i in self.indice:
+            worldPopulation+=self.R[i]+self.I[i]+self.S[i]
+        print "Population initiale ",worldPopulation
+        
+
+
+
+    #####################################################################################
+    ##### Classe d'infection des populations au sein d'une meme ville, sans echange #####
+    #####################################################################################
     def infection(self,Psi,Pir,iterations):
-			for j in xrange(iterations):
-				print "CONTAMINATION NUMBER ",j+1
-				for i in xrange(len(self.population)):
-						self.R[i]=self.R[i]+(Pir*self.I[i])//1
-						self.I[i]=self.I[i]-(Pir*self.I[i])//1+(Psi*self.S[i])//1
-						self.S[i]=self.S[i]-(Psi*self.S[i])//1
-						print "Ville : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i]
+	
+	for j in xrange(iterations): #Nombre d'iterations d'infection
+	   #print "CONTAMINATION NUMBER ",j+1
+	   
+	   for i in xrange(len(self.population)):
+	       self.R[i]=self.R[i]+(Pir*self.I[i])//1                         #Avec la probabilite Pir de passer du stade I a R
+	       self.I[i]=self.I[i]-(Pir*self.I[i])//1+(Psi*self.S[i])//1     #Avec la probabilite Pir de passer du stade I a R soustraite et Psi celle de passer de S a I ajoutee 
+	       self.S[i]=self.S[i]-(Psi*self.S[i])//1                         #Avec la probabilite Psi de passer stade S a I
+	       
+	       #print "Ville : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i]
+	
+	
+	##### S'assurer du nombre de personnes constant en absence de naissances #####
+        worldPopulation=0
+        for i in self.indice:
+            worldPopulation+=self.R[i]+self.I[i]+self.S[i]
+        print "After infection",worldPopulation
+    
+    
+    
+    
+    
+    #####################################################################################
+    ############### Classe de mouvement des populations entre villes ####################
+    #####################################################################################
+    def transport(self,PvoyageS,PvoyageI,PvoyageR):      
+                                
+        ##### Safeguard before first move #####
+        sauvegardeR=[]
+        sauvegardeI=[]
+        sauvegardeS=[]
+
+        for i in self.indice:
+            sauvegardeR.append(self.R[i])
+            sauvegardeI.append(self.I[i])
+            sauvegardeS.append(self.S[i])
+        
+        
+        ##### Population mouvements #####
+        """
+        Chaque etat S, I et R a sa propre probabilite de voyage pour l'instant.
+        Ainsi, dans chaque ville, on envoie une proportion PvoyageR de la population
+        R vers une autre ville. De meme pour chaque etat.
+        La sauvegarde sert a calculer la part de la population qui voyage entre l'instant
+        t et t+1. Pour cela, nous devons stocker les 2 instants pour que les populations
+        ne bougent pas entre les calculs.
+        Self.fly[i][j] regroupe la probabilite de decoler de la ville i pour se rendre
+        vers la ville j.
+        Pour chaque ville i, on fait arriver des gens de toutes les villes j. On aura
+        aussi forcement un depart avec une probabilite PvoyageR de la population R de
+        la ville. D'ou le dernier calcul.
+        """   
+        
+        for i in self.indice:
+            for j in self.indice:
+                if i!=j:
+                    self.R[i]+=(sauvegardeR[j]*PvoyageR*self.fly[i][j])//1
+                    self.I[i]+=(sauvegardeI[j]*PvoyageI*self.fly[i][j])//1
+                    self.S[i]+=(sauvegardeS[j]*PvoyageS*self.fly[i][j])//1
+            self.R[i]-=(sauvegardeR[j]*PvoyageR)//1
+            self.I[i]-=(sauvegardeI[j]*PvoyageI)//1
+            self.S[i]-=(sauvegardeS[j]*PvoyageS)//1
 
 
-"""	Extrait du SIR fait en TP en debut d'annee "			
-    def run (self):
-		for t in range(self.limiteTime):
-			self.move()
-			self.reproduce()
-			self.rayon=math.sqrt(self.infectedSurface()/math.pi)
-			print self.space
-			print "Rayon d'infection=%f"%self.rayon
-		self.export(self.fichier)
+    	##### S'assurer du nombre de personnes constant en absence de naissances #####
+        worldPopulation=0
+        for i in self.indice:
+            worldPopulation+=self.R[i]+self.I[i]+self.S[i]
+        print "After mouvement ",worldPopulation
+
+
+
+######################################################################################
 """
-
-
-#J'aurais bien aime que ceci soit sur le fichier simulation.py, faire plusieurs
-#classes pour lancer le programme mais je n'ai pas reussi a faire le lien entre les
-#classes car une city doit etre creee dans simulation tout en utilisant les variables
-#de simulation...
+J'aurais bien aime que la suite soit sur le fichier simulation.py, faire plusieurs 
+classes pour lancer le programme mais je n'ai pas reussi a faire le lien entre les
+classes car une city doit etre creee dans simulation tout en utilisant les variables
+de simulation...
+"""
 
 class simulation:
     
@@ -86,16 +181,36 @@ class simulation:
                 content[i]=content[i].split("\t")[0]
             self.Psi=float(content[2])
             self.Pir=float(content[3])
-
-
-#Ps, Pi et Pr fixent les probabilites initiales d'etre infecte initialement,
-#est-ce utile ? Ou est ce qu'on met tout les I et R a 0 au debut avec tout le monde sain, pas encore malade ?
-#Psi = Proba qu'un sain devienne infecte
-#Pir = Proba qu'un infecte devienne resistant
-
+            self.PvoyageS=float(content[4])
+            self.PvoyageI=float(content[5])
+            self.PvoyageR=float(content[6])
+            
+"""
+Ps, Pi et Pr fixent les probabilites initiales d'etre infecte initialement,
+est-ce utile ? Ou est ce qu'on met tout les I et R a 0 au debut avec tout le monde sain, pas encore malade ?
+Psi = Proba qu'un sain devienne infecte
+Pir = Proba qu'un infecte devienne resistant
+"""
 
 print '##### PROJET 3BIM - INSA Lyon - Bosc, Greugny, Jaouen, Kuhlburger #####'
 s=simulation("SimulationParameters.txt")
 print "AVANT DEBUT DE CONTAMINATION"
-worldmap=worldCities('Population.csv')
-worldmap.infection(s.Psi,s.Pir,5) #On pourrait apres rentrer une maladie en parametre a la place de Psi et Pri et c'est la maladie meme qui definirait les probabilites Psi et Pri
+worldmap=worldCities('Population.csv','FlyFrequency.csv')
+for i in xrange(20): #20 iterations dans lesquelles on a 5 iterations d'infection entre chaque processus de mouvement
+    worldmap.infection(s.Psi,s.Pir,5) #On pourrait apres rentrer une maladie en parametre a la place de Psi et Pri et c'est la maladie meme qui definirait les probabilites Psi et Pri
+    worldmap.transport(s.PvoyageS,s.PvoyageI,s.PvoyageR) #Mouvement des populations par transport
+    
+######################################################################################    
+
+        
+    
+"""	Extrait du SIR fait en TP en debut d'annee			
+    def run (self):
+		for t in range(self.limiteTime):
+			self.move()
+			self.reproduce()
+			self.rayon=math.sqrt(self.infectedSurface()/math.pi)
+			print self.space
+			print "Rayon d'infection=%f"%self.rayon
+		self.export(self.fichier)
+"""
