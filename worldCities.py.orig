@@ -186,27 +186,27 @@ class worldCities:
 
 
     #####################################################################################
-    ######################## Classe de mort dans chaque ville ###########################
+    ############### Classe de mouvement des populations entre villes ####################
     #####################################################################################
-    def death(self,PdR,PdI,PdS):
+    def death(self):
 
         for i in self.indice:
-            self.R[i]-=(self.R[i]*PdR)//1
-            self.I[i]-=(self.I[i]*PdI)//1
-            self.S[i]-=(self.S[i]*PdS)//1
-    
-    
-    #####################################################################################
-    #################### Classe de naissances dans chaque ville #########################
-    #####################################################################################
-    
-            
-    def birth(self,PbR,PbI,PbS):
+                    
+            #Death in the city i
+            self.R[i]-=(self.R[i]*self.PdR)//1
+            self.I[i]-=(self.I[i]*self.PdI)//1
+            self.S[i]-=(self.S[i]*self.PdS)//1                    
+            print "Ville : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i]
 
-        for i in self.indice:        
-            self.R[i]+=(self.R[i]*PbR)//1 #Est-ce que les R font naitre forcement des R ?
-            self.I[i]+=(self.I[i]*PbI)//1 #Est-ce que les I font naitre forcement des I ?
-            self.S[i]+=(self.S[i]*PbS)//1
+    def birth(self):
+
+        for i in self.indice:
+                    
+            #Death in the city i
+            self.R[i]+=(self.R[i]*self.PbR)//1
+            self.I[i]+=(self.I[i]*self.PbI)//1
+            self.S[i]+=(self.S[i]*self.PbS)//1                    
+            print "Ville : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i]
 
 
 
@@ -225,8 +225,6 @@ class simulation:
         ##### Import parameters #####
         with open(field,'r') as f:
             content = f.readlines()
-            print content
-            print len(content)
             for i in range(len(content)):
                 content[i]=content[i].split("\t")[0]
             self.Psi=float(content[2])
@@ -237,9 +235,6 @@ class simulation:
             self.PdS=float(content[7])
             self.PdI=float(content[8])
             self.PdR=float(content[9])
-            self.PbS=float(content[7])
-            self.PbI=float(content[8])
-            self.PbR=float(content[9])
             
 """
 Ps, Pi et Pr fixent les probabilites initiales d'etre infecte initialement,
@@ -248,26 +243,16 @@ Psi = Proba qu'un sain devienne infecte
 Pir = Proba qu'un infecte devienne resistant
 """
 
-
 print '##### PROJET 3BIM - INSA Lyon - Bosc, Greugny, Jaouen, Kuhlburger #####'
 s=simulation("SimulationParameters.txt")
 print "AVANT DEBUT DE CONTAMINATION"
 worldmap=worldCities('Population.csv','FlyFrequency.csv')
-
-fich=open("OutputPopulations.txt","w")
-fich.writelines("Name\t\t S \t I \t R \t Total \n\n")
 for i in xrange(20): #20 iterations dans lesquelles on a 5 iterations d'infection entre chaque processus de mouvement
-
-	print "ITERATION ",i
-	#worldmap.death(s.PdR,s.PdI,s.PdS)
-	#worldmap.birth(s.PbR,s.PbI,s.PbS)
-	worldmap.infection(s.Psi,s.Pir,5) #On pourrait apres rentrer une maladie en parametre a la place de Psi et Pri et c'est la maladie meme qui definirait les probabilites Psi et Pri
-	#worldmap.transport(s.PvoyageS,s.PvoyageI,s.PvoyageR) #Mouvement des populations par transport
-	
-	for j in worldmap.indice:
-		contenu=str(worldmap.name[j])+'\t\t'+str(worldmap.S[j])+'\t'+str(worldmap.I[j])+'\t'+str(worldmap.R[j])+'\n';
-		fich.writelines(contenu)
-	fich.writelines('\n')
+    print "ITERATION ",i
+    worldmap.death()
+    worldmap.birth()
+    worldmap.infection(s.Psi,s.Pir,5) #On pourrait apres rentrer une maladie en parametre a la place de Psi et Pri et c'est la maladie meme qui definirait les probabilites Psi et Pri
+    worldmap.transport(s.PvoyageS,s.PvoyageI,s.PvoyageR) #Mouvement des populations par transport
     
 ######################################################################################    
 

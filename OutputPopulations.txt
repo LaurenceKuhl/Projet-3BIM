@@ -1,0 +1,1062 @@
+Name		 S 	 I 	 R 	 Total 
+
+London		7074.0	3929.0	974.0
+Paris		7327.0	4069.0	1009.0
+Rome		1700.0	943.0	231.0
+Berlin		2050.0	1138.0	281.0
+Madrid		1856.0	1031.0	254.0
+Warsaw		1021.0	566.0	139.0
+Budapest		1025.0	568.0	140.0
+Sofia		846.0	470.0	114.0
+Stockholm		543.0	301.0	73.0
+Hong-Kong		4177.0	2320.0	574.0
+Tokyo		7958.0	4421.0	1095.0
+Peking		12491.0	6938.0	1721.0
+Shanghai		9940.0	5522.0	1369.0
+Singapore		3270.0	1816.0	449.0
+Manila		981.0	546.0	133.0
+Bangkok		4873.0	2706.0	670.0
+Jacarta		5763.0	3201.0	793.0
+Calcutta		2657.0	1475.0	364.0
+Bombay		7371.0	4093.0	1014.0
+Delhi		9915.0	5507.0	1365.0
+Madras		3675.0	2041.0	505.0
+Seoul		5989.0	3327.0	824.0
+Teheran		5225.0	2902.0	719.0
+Karachi		12486.0	6936.0	1720.0
+Cairo		9126.0	5069.0	1257.0
+Lagos		7140.0	3968.0	982.0
+Kinshasa		7129.0	3960.0	982.0
+Johannesburg		2620.0	1456.0	359.0
+Casablanca		1985.0	1103.0	272.0
+Mexico		12402.0	6888.0	1710.0
+Bogota		4004.0	2224.0	550.0
+Havana		1246.0	690.0	170.0
+Caracas		2866.0	1591.0	393.0
+Lima		5250.0	2917.0	723.0
+Santiago		2902.0	1611.0	399.0
+Buenos Aires		8563.0	4757.0	1180.0
+Rio de Janeiro		7453.0	4140.0	1027.0
+Sao Paulo		7026.0	3902.0	967.0
+Honolulu		565.0	312.0	76.0
+Sydney		2860.0	1587.0	393.0
+Melbourne		2624.0	1457.0	359.0
+Perth		1196.0	662.0	163.0
+Wellington		108.0	58.0	13.0
+Montreal		2439.0	1353.0	335.0
+New York		5015.0	2787.0	689.0
+Los Angeles		9685.0	5380.0	1335.0
+Washington		3462.0	1923.0	475.0
+Houston		3729.0	2071.0	513.0
+Chicago		5627.0	3125.0	774.0
+San Francisco		5085.0	2823.0	699.0
+Atlanta		3224.0	1790.0	443.0
+Capetown		258.0	143.0	33.0
+
+London		4179.0	4641.0	3157.0
+Paris		4329.0	4807.0	3269.0
+Rome		1005.0	1115.0	754.0
+Berlin		1212.0	1345.0	912.0
+Madrid		1098.0	1218.0	825.0
+Warsaw		605.0	669.0	452.0
+Budapest		607.0	672.0	454.0
+Sofia		502.0	555.0	373.0
+Stockholm		323.0	355.0	239.0
+Hong-Kong		2468.0	2740.0	1863.0
+Tokyo		4701.0	5221.0	3552.0
+Peking		7378.0	8195.0	5577.0
+Shanghai		5871.0	6521.0	4439.0
+Singapore		1933.0	2145.0	1457.0
+Manila		581.0	645.0	434.0
+Bangkok		2880.0	3197.0	2172.0
+Jacarta		3405.0	3780.0	2572.0
+Calcutta		1571.0	1742.0	1183.0
+Bombay		4354.0	4835.0	3289.0
+Delhi		5857.0	6505.0	4425.0
+Madras		2172.0	2410.0	1639.0
+Seoul		3538.0	3930.0	2672.0
+Teheran		3087.0	3428.0	2331.0
+Karachi		7375.0	8191.0	5576.0
+Cairo		5391.0	5988.0	4073.0
+Lagos		4218.0	4686.0	3186.0
+Kinshasa		4212.0	4677.0	3182.0
+Johannesburg		1548.0	1720.0	1167.0
+Casablanca		1175.0	1301.0	884.0
+Mexico		7325.0	8136.0	5539.0
+Bogota		2366.0	2627.0	1785.0
+Havana		738.0	816.0	552.0
+Caracas		1693.0	1881.0	1276.0
+Lima		3102.0	3445.0	2343.0
+Santiago		1715.0	1903.0	1294.0
+Buenos Aires		5058.0	5620.0	3822.0
+Rio de Janeiro		4403.0	4890.0	3327.0
+Sao Paulo		4150.0	4610.0	3135.0
+Honolulu		336.0	370.0	247.0
+Sydney		1691.0	1875.0	1274.0
+Melbourne		1551.0	1721.0	1168.0
+Perth		708.0	783.0	530.0
+Wellington		66.0	70.0	43.0
+Montreal		1442.0	1600.0	1085.0
+New York		2963.0	3290.0	2238.0
+Los Angeles		5721.0	6353.0	4326.0
+Washington		2046.0	2271.0	1543.0
+Houston		2204.0	2447.0	1662.0
+Chicago		3325.0	3691.0	2510.0
+San Francisco		3005.0	3335.0	2267.0
+Atlanta		1905.0	2115.0	1437.0
+Capetown		154.0	170.0	110.0
+
+London		2470.0	4111.0	5396.0
+Paris		2559.0	4259.0	5587.0
+Rome		595.0	989.0	1290.0
+Berlin		717.0	1193.0	1559.0
+Madrid		650.0	1080.0	1411.0
+Warsaw		359.0	594.0	773.0
+Budapest		360.0	597.0	776.0
+Sofia		298.0	492.0	640.0
+Stockholm		192.0	317.0	408.0
+Hong-Kong		1458.0	2429.0	3184.0
+Tokyo		2778.0	4626.0	6070.0
+Peking		4358.0	7261.0	9531.0
+Shanghai		3468.0	5777.0	7586.0
+Singapore		1143.0	1901.0	2491.0
+Manila		344.0	573.0	743.0
+Bangkok		1701.0	2835.0	3713.0
+Jacarta		2013.0	3348.0	4396.0
+Calcutta		929.0	1544.0	2023.0
+Bombay		2574.0	4282.0	5622.0
+Delhi		3460.0	5763.0	7564.0
+Madras		1284.0	2136.0	2801.0
+Seoul		2091.0	3481.0	4568.0
+Teheran		1825.0	3037.0	3984.0
+Karachi		4357.0	7256.0	9529.0
+Cairo		3185.0	5305.0	6962.0
+Lagos		2493.0	4151.0	5446.0
+Kinshasa		2488.0	4145.0	5438.0
+Johannesburg		916.0	1523.0	1996.0
+Casablanca		696.0	1154.0	1510.0
+Mexico		4327.0	7208.0	9465.0
+Bogota		1399.0	2327.0	3052.0
+Havana		438.0	724.0	944.0
+Caracas		1001.0	1667.0	2182.0
+Lima		1833.0	3053.0	4004.0
+Santiago		1014.0	1687.0	2211.0
+Buenos Aires		2989.0	4977.0	6534.0
+Rio de Janeiro		2601.0	4332.0	5687.0
+Sao Paulo		2452.0	4084.0	5359.0
+Honolulu		200.0	328.0	425.0
+Sydney		999.0	1664.0	2177.0
+Melbourne		918.0	1524.0	1998.0
+Perth		421.0	694.0	906.0
+Wellington		41.0	64.0	74.0
+Montreal		854.0	1417.0	1856.0
+New York		1751.0	2916.0	3824.0
+Los Angeles		3380.0	5628.0	7392.0
+Washington		1210.0	2013.0	2637.0
+Houston		1304.0	2168.0	2841.0
+Chicago		1965.0	3271.0	4290.0
+San Francisco		1776.0	2955.0	3876.0
+Atlanta		1126.0	1875.0	2456.0
+Capetown		93.0	151.0	190.0
+
+London		1459.0	3240.0	7278.0
+Paris		1513.0	3355.0	7537.0
+Rome		353.0	780.0	1741.0
+Berlin		425.0	940.0	2104.0
+Madrid		386.0	851.0	1904.0
+Warsaw		214.0	468.0	1044.0
+Budapest		214.0	472.0	1047.0
+Sofia		179.0	387.0	864.0
+Stockholm		115.0	251.0	551.0
+Hong-Kong		863.0	1913.0	4295.0
+Tokyo		1642.0	3644.0	8188.0
+Peking		2575.0	5717.0	12858.0
+Shanghai		2050.0	4549.0	10232.0
+Singapore		677.0	1497.0	3361.0
+Manila		205.0	451.0	1004.0
+Bangkok		1006.0	2232.0	5011.0
+Jacarta		1190.0	2638.0	5929.0
+Calcutta		551.0	1216.0	2729.0
+Bombay		1522.0	3373.0	7583.0
+Delhi		2044.0	4538.0	10205.0
+Madras		760.0	1683.0	3778.0
+Seoul		1236.0	2742.0	6162.0
+Teheran		1080.0	2393.0	5373.0
+Karachi		2574.0	5715.0	12853.0
+Cairo		1882.0	4178.0	9392.0
+Lagos		1474.0	3268.0	7348.0
+Kinshasa		1471.0	3265.0	7335.0
+Johannesburg		543.0	1200.0	2692.0
+Casablanca		414.0	909.0	2037.0
+Mexico		2557.0	5676.0	12767.0
+Bogota		828.0	1834.0	4116.0
+Havana		261.0	571.0	1274.0
+Caracas		592.0	1314.0	2944.0
+Lima		1084.0	2404.0	5402.0
+Santiago		600.0	1330.0	2982.0
+Buenos Aires		1766.0	3921.0	8813.0
+Rio de Janeiro		1538.0	3411.0	7671.0
+Sao Paulo		1450.0	3216.0	7229.0
+Honolulu		119.0	261.0	573.0
+Sydney		592.0	1311.0	2937.0
+Melbourne		544.0	1202.0	2694.0
+Perth		251.0	549.0	1221.0
+Wellington		26.0	52.0	101.0
+Montreal		506.0	1117.0	2504.0
+New York		1036.0	2296.0	5159.0
+Los Angeles		1998.0	4433.0	9969.0
+Washington		716.0	1586.0	3558.0
+Houston		772.0	1708.0	3833.0
+Chicago		1162.0	2576.0	5788.0
+San Francisco		1051.0	2328.0	5228.0
+Atlanta		666.0	1477.0	3314.0
+Capetown		57.0	120.0	257.0
+
+London		864.0	2391.0	8722.0
+Paris		895.0	2477.0	9033.0
+Rome		211.0	576.0	2087.0
+Berlin		252.0	696.0	2521.0
+Madrid		230.0	629.0	2282.0
+Warsaw		128.0	347.0	1251.0
+Budapest		128.0	349.0	1256.0
+Sofia		108.0	288.0	1034.0
+Stockholm		70.0	186.0	661.0
+Hong-Kong		511.0	1414.0	5146.0
+Tokyo		972.0	2690.0	9812.0
+Peking		1523.0	4220.0	15407.0
+Shanghai		1212.0	3359.0	12260.0
+Singapore		402.0	1106.0	4027.0
+Manila		123.0	334.0	1203.0
+Bangkok		596.0	1649.0	6004.0
+Jacarta		704.0	1949.0	7104.0
+Calcutta		327.0	899.0	3270.0
+Bombay		900.0	2492.0	9086.0
+Delhi		1208.0	3352.0	12227.0
+Madras		450.0	1243.0	4528.0
+Seoul		731.0	2025.0	7384.0
+Teheran		639.0	1768.0	6439.0
+Karachi		1522.0	4219.0	15401.0
+Cairo		1113.0	3085.0	11254.0
+Lagos		873.0	2413.0	8804.0
+Kinshasa		870.0	2411.0	8790.0
+Johannesburg		323.0	887.0	3225.0
+Casablanca		246.0	673.0	2441.0
+Mexico		1512.0	4190.0	15298.0
+Bogota		491.0	1355.0	4932.0
+Havana		155.0	423.0	1528.0
+Caracas		351.0	970.0	3529.0
+Lima		642.0	1775.0	6473.0
+Santiago		356.0	983.0	3573.0
+Buenos Aires		1044.0	2896.0	10560.0
+Rio de Janeiro		910.0	2519.0	9191.0
+Sao Paulo		858.0	2375.0	8662.0
+Honolulu		73.0	193.0	687.0
+Sydney		351.0	969.0	3520.0
+Melbourne		323.0	889.0	3228.0
+Perth		150.0	406.0	1465.0
+Wellington		17.0	40.0	122.0
+Montreal		300.0	827.0	3000.0
+New York		613.0	1697.0	6181.0
+Los Angeles		1182.0	3273.0	11945.0
+Washington		424.0	1172.0	4264.0
+Houston		458.0	1262.0	4593.0
+Chicago		688.0	1903.0	6935.0
+San Francisco		622.0	1720.0	6265.0
+Atlanta		395.0	1091.0	3971.0
+Capetown		36.0	89.0	309.0
+
+London		512.0	1695.0	9770.0
+Paris		531.0	1757.0	10117.0
+Rome		126.0	409.0	2339.0
+Berlin		151.0	494.0	2824.0
+Madrid		138.0	447.0	2556.0
+Warsaw		78.0	247.0	1401.0
+Budapest		78.0	249.0	1406.0
+Sofia		66.0	205.0	1159.0
+Stockholm		43.0	133.0	741.0
+Hong-Kong		303.0	1004.0	5764.0
+Tokyo		576.0	1908.0	10990.0
+Peking		900.0	2992.0	17258.0
+Shanghai		717.0	2382.0	13732.0
+Singapore		239.0	786.0	4510.0
+Manila		73.0	239.0	1348.0
+Bangkok		354.0	1170.0	6725.0
+Jacarta		417.0	1383.0	7957.0
+Calcutta		195.0	639.0	3662.0
+Bombay		533.0	1767.0	10178.0
+Delhi		715.0	2376.0	13696.0
+Madras		268.0	882.0	5071.0
+Seoul		433.0	1436.0	8271.0
+Teheran		380.0	1254.0	7212.0
+Karachi		900.0	2991.0	17251.0
+Cairo		658.0	2188.0	12606.0
+Lagos		518.0	1711.0	9861.0
+Kinshasa		515.0	1710.0	9846.0
+Johannesburg		192.0	631.0	3612.0
+Casablanca		146.0	479.0	2735.0
+Mexico		894.0	2970.0	17136.0
+Bogota		292.0	962.0	5524.0
+Havana		93.0	301.0	1712.0
+Caracas		209.0	689.0	3952.0
+Lima		381.0	1258.0	7251.0
+Santiago		212.0	697.0	4003.0
+Buenos Aires		618.0	2053.0	11829.0
+Rio de Janeiro		540.0	1787.0	10293.0
+Sao Paulo		509.0	1684.0	9702.0
+Honolulu		45.0	139.0	769.0
+Sydney		209.0	689.0	3942.0
+Melbourne		192.0	633.0	3615.0
+Perth		90.0	289.0	1642.0
+Wellington		12.0	29.0	138.0
+Montreal		179.0	587.0	3361.0
+New York		364.0	1204.0	6923.0
+Los Angeles		700.0	2320.0	13380.0
+Washington		252.0	832.0	4776.0
+Houston		272.0	895.0	5146.0
+Chicago		408.0	1350.0	7768.0
+San Francisco		369.0	1219.0	7019.0
+Atlanta		235.0	773.0	4449.0
+Capetown		23.0	65.0	346.0
+
+London		304.0	1169.0	10504.0
+Paris		315.0	1213.0	10877.0
+Rome		76.0	284.0	2514.0
+Berlin		90.0	343.0	3036.0
+Madrid		83.0	310.0	2748.0
+Warsaw		48.0	172.0	1506.0
+Budapest		48.0	173.0	1512.0
+Sofia		41.0	143.0	1246.0
+Stockholm		27.0	93.0	797.0
+Hong-Kong		180.0	694.0	6197.0
+Tokyo		342.0	1316.0	11816.0
+Peking		533.0	2062.0	18555.0
+Shanghai		425.0	1642.0	14764.0
+Singapore		144.0	542.0	4849.0
+Manila		45.0	166.0	1449.0
+Bangkok		211.0	807.0	7231.0
+Jacarta		249.0	954.0	8554.0
+Calcutta		117.0	442.0	3937.0
+Bombay		316.0	1220.0	10942.0
+Delhi		423.0	1639.0	14725.0
+Madras		161.0	608.0	5452.0
+Seoul		257.0	991.0	8892.0
+Teheran		226.0	866.0	7754.0
+Karachi		533.0	2062.0	18547.0
+Cairo		390.0	1509.0	13553.0
+Lagos		308.0	1180.0	10602.0
+Kinshasa		306.0	1178.0	10587.0
+Johannesburg		115.0	436.0	3884.0
+Casablanca		89.0	331.0	2940.0
+Mexico		530.0	2047.0	18423.0
+Bogota		174.0	664.0	5940.0
+Havana		57.0	207.0	1842.0
+Caracas		126.0	475.0	4249.0
+Lima		227.0	868.0	7795.0
+Santiago		126.0	482.0	4304.0
+Buenos Aires		367.0	1416.0	12717.0
+Rio de Janeiro		321.0	1232.0	11067.0
+Sao Paulo		303.0	1161.0	10431.0
+Honolulu		28.0	97.0	828.0
+Sydney		126.0	475.0	4239.0
+Melbourne		115.0	438.0	3887.0
+Perth		54.0	201.0	1766.0
+Wellington		9.0	22.0	148.0
+Montreal		108.0	406.0	3613.0
+New York		217.0	830.0	7444.0
+Los Angeles		414.0	1601.0	14385.0
+Washington		151.0	574.0	5135.0
+Houston		162.0	619.0	5532.0
+Chicago		243.0	931.0	8352.0
+San Francisco		219.0	843.0	7545.0
+Atlanta		140.0	535.0	4782.0
+Capetown		16.0	46.0	372.0
+
+London		181.0	791.0	11005.0
+Paris		188.0	820.0	11397.0
+Rome		47.0	193.0	2634.0
+Berlin		54.0	233.0	3182.0
+Madrid		51.0	211.0	2879.0
+Warsaw		30.0	119.0	1577.0
+Budapest		30.0	119.0	1584.0
+Sofia		26.0	98.0	1306.0
+Stockholm		18.0	64.0	835.0
+Hong-Kong		108.0	469.0	6494.0
+Tokyo		204.0	890.0	12380.0
+Peking		316.0	1394.0	19440.0
+Shanghai		252.0	1109.0	15470.0
+Singapore		87.0	367.0	5081.0
+Manila		28.0	113.0	1519.0
+Bangkok		126.0	546.0	7577.0
+Jacarta		149.0	646.0	8962.0
+Calcutta		72.0	299.0	4125.0
+Bombay		189.0	824.0	11465.0
+Delhi		252.0	1107.0	15428.0
+Madras		97.0	412.0	5712.0
+Seoul		154.0	670.0	9316.0
+Teheran		135.0	586.0	8125.0
+Karachi		316.0	1394.0	19432.0
+Cairo		232.0	1020.0	14200.0
+Lagos		184.0	797.0	11109.0
+Kinshasa		183.0	796.0	11092.0
+Johannesburg		70.0	295.0	4070.0
+Casablanca		54.0	225.0	3081.0
+Mexico		315.0	1383.0	19302.0
+Bogota		105.0	450.0	6223.0
+Havana		36.0	141.0	1929.0
+Caracas		76.0	323.0	4451.0
+Lima		136.0	588.0	8166.0
+Santiago		76.0	326.0	4510.0
+Buenos Aires		219.0	956.0	13325.0
+Rio de Janeiro		191.0	833.0	11596.0
+Sao Paulo		180.0	785.0	10930.0
+Honolulu		18.0	67.0	868.0
+Sydney		76.0	323.0	4441.0
+Melbourne		70.0	297.0	4073.0
+Perth		34.0	137.0	1850.0
+Wellington		9.0	15.0	155.0
+Montreal		66.0	276.0	3785.0
+New York		130.0	562.0	7799.0
+Los Angeles		246.0	1081.0	15073.0
+Washington		90.0	389.0	5381.0
+Houston		98.0	418.0	5797.0
+Chicago		146.0	629.0	8751.0
+San Francisco		132.0	569.0	7906.0
+Atlanta		84.0	363.0	5010.0
+Capetown		11.0	33.0	390.0
+
+London		108.0	526.0	11343.0
+Paris		113.0	546.0	11746.0
+Rome		30.0	129.0	2715.0
+Berlin		34.0	156.0	3279.0
+Madrid		32.0	141.0	2968.0
+Warsaw		19.0	81.0	1626.0
+Budapest		19.0	81.0	1633.0
+Sofia		17.0	67.0	1346.0
+Stockholm		13.0	44.0	860.0
+Hong-Kong		66.0	313.0	6692.0
+Tokyo		122.0	593.0	12759.0
+Peking		189.0	927.0	20034.0
+Shanghai		151.0	737.0	15943.0
+Singapore		54.0	246.0	5235.0
+Manila		18.0	77.0	1565.0
+Bangkok		76.0	365.0	7808.0
+Jacarta		90.0	431.0	9236.0
+Calcutta		45.0	201.0	4250.0
+Bombay		114.0	548.0	11816.0
+Delhi		151.0	736.0	15900.0
+Madras		59.0	275.0	5887.0
+Seoul		93.0	446.0	9601.0
+Teheran		81.0	391.0	8374.0
+Karachi		189.0	927.0	20026.0
+Cairo		139.0	679.0	14634.0
+Lagos		110.0	533.0	11447.0
+Kinshasa		110.0	531.0	11430.0
+Johannesburg		43.0	197.0	4195.0
+Casablanca		34.0	151.0	3175.0
+Mexico		188.0	920.0	19892.0
+Bogota		64.0	300.0	6414.0
+Havana		23.0	94.0	1989.0
+Caracas		47.0	216.0	4587.0
+Lima		81.0	393.0	8416.0
+Santiago		47.0	218.0	4647.0
+Buenos Aires		132.0	636.0	13732.0
+Rio de Janeiro		114.0	555.0	11951.0
+Sao Paulo		108.0	524.0	11263.0
+Honolulu		13.0	46.0	894.0
+Sydney		47.0	216.0	4577.0
+Melbourne		43.0	199.0	4198.0
+Perth		22.0	93.0	1906.0
+Wellington		9.0	10.0	160.0
+Montreal		41.0	185.0	3901.0
+New York		79.0	375.0	8037.0
+Los Angeles		146.0	720.0	15534.0
+Washington		54.0	260.0	5546.0
+Houston		60.0	280.0	5973.0
+Chicago		89.0	419.0	9018.0
+San Francisco		81.0	379.0	8147.0
+Atlanta		52.0	242.0	5163.0
+Capetown		9.0	23.0	402.0
+
+London		66.0	347.0	11564.0
+Paris		68.0	360.0	11977.0
+Rome		19.0	86.0	2769.0
+Berlin		22.0	103.0	3344.0
+Madrid		21.0	93.0	3027.0
+Warsaw		14.0	54.0	1658.0
+Budapest		14.0	54.0	1665.0
+Sofia		12.0	46.0	1372.0
+Stockholm		9.0	31.0	877.0
+Hong-Kong		41.0	207.0	6823.0
+Tokyo		73.0	391.0	13010.0
+Peking		114.0	609.0	20427.0
+Shanghai		90.0	487.0	16254.0
+Singapore		34.0	164.0	5337.0
+Manila		13.0	51.0	1596.0
+Bangkok		47.0	241.0	7961.0
+Jacarta		54.0	285.0	9418.0
+Calcutta		28.0	134.0	4334.0
+Bombay		69.0	362.0	12047.0
+Delhi		90.0	486.0	16211.0
+Madras		37.0	182.0	6002.0
+Seoul		57.0	294.0	9789.0
+Teheran		49.0	257.0	8540.0
+Karachi		114.0	609.0	20419.0
+Cairo		84.0	448.0	14920.0
+Lagos		66.0	351.0	11673.0
+Kinshasa		66.0	350.0	11655.0
+Johannesburg		27.0	131.0	4277.0
+Casablanca		22.0	101.0	3237.0
+Mexico		113.0	606.0	20281.0
+Bogota		40.0	198.0	6540.0
+Havana		16.0	63.0	2027.0
+Caracas		30.0	144.0	4676.0
+Lima		49.0	259.0	8582.0
+Santiago		30.0	144.0	4738.0
+Buenos Aires		81.0	419.0	14000.0
+Rio de Janeiro		69.0	365.0	12186.0
+Sao Paulo		66.0	345.0	11484.0
+Honolulu		9.0	32.0	912.0
+Sydney		30.0	144.0	4666.0
+Melbourne		27.0	133.0	4280.0
+Perth		15.0	62.0	1944.0
+Wellington		9.0	9.0	161.0
+Montreal		26.0	123.0	3978.0
+New York		49.0	248.0	8194.0
+Los Angeles		89.0	472.0	15839.0
+Washington		34.0	171.0	5655.0
+Houston		37.0	186.0	6090.0
+Chicago		54.0	278.0	9194.0
+San Francisco		49.0	251.0	8307.0
+Atlanta		33.0	160.0	5264.0
+Capetown		9.0	16.0	409.0
+
+London		41.0	227.0	11709.0
+Paris		42.0	235.0	12128.0
+Rome		14.0	57.0	2803.0
+Berlin		15.0	68.0	3386.0
+Madrid		15.0	62.0	3064.0
+Warsaw		9.0	37.0	1680.0
+Budapest		9.0	37.0	1687.0
+Sofia		9.0	31.0	1390.0
+Stockholm		9.0	20.0	888.0
+Hong-Kong		26.0	136.0	6909.0
+Tokyo		45.0	255.0	13174.0
+Peking		69.0	397.0	20684.0
+Shanghai		54.0	319.0	16458.0
+Singapore		22.0	109.0	5404.0
+Manila		9.0	35.0	1616.0
+Bangkok		30.0	157.0	8062.0
+Jacarta		34.0	185.0	9538.0
+Calcutta		18.0	89.0	4389.0
+Bombay		43.0	236.0	12199.0
+Delhi		54.0	318.0	16415.0
+Madras		24.0	119.0	6078.0
+Seoul		36.0	192.0	9912.0
+Teheran		31.0	168.0	8647.0
+Karachi		69.0	397.0	20676.0
+Cairo		52.0	293.0	15107.0
+Lagos		41.0	229.0	11820.0
+Kinshasa		41.0	228.0	11802.0
+Johannesburg		18.0	85.0	4332.0
+Casablanca		15.0	67.0	3278.0
+Mexico		68.0	395.0	20537.0
+Bogota		25.0	131.0	6622.0
+Havana		11.0	43.0	2052.0
+Caracas		19.0	95.0	4736.0
+Lima		31.0	170.0	8689.0
+Santiago		19.0	95.0	4798.0
+Buenos Aires		49.0	275.0	14176.0
+Rio de Janeiro		43.0	238.0	12339.0
+Sao Paulo		41.0	226.0	11628.0
+Honolulu		9.0	21.0	923.0
+Sydney		19.0	95.0	4726.0
+Melbourne		18.0	87.0	4335.0
+Perth		10.0	43.0	1968.0
+Wellington		9.0	9.0	161.0
+Montreal		17.0	82.0	4028.0
+New York		31.0	163.0	8297.0
+Los Angeles		54.0	309.0	16037.0
+Washington		22.0	112.0	5726.0
+Houston		24.0	122.0	6167.0
+Chicago		34.0	183.0	9309.0
+San Francisco		31.0	164.0	8412.0
+Atlanta		21.0	106.0	5330.0
+Capetown		9.0	11.0	414.0
+
+London		26.0	148.0	11803.0
+Paris		27.0	153.0	12225.0
+Rome		9.0	40.0	2825.0
+Berlin		10.0	46.0	3413.0
+Madrid		10.0	43.0	3088.0
+Warsaw		9.0	24.0	1693.0
+Budapest		9.0	24.0	1700.0
+Sofia		9.0	20.0	1401.0
+Stockholm		9.0	14.0	894.0
+Hong-Kong		17.0	90.0	6964.0
+Tokyo		28.0	166.0	13280.0
+Peking		43.0	257.0	20850.0
+Shanghai		34.0	207.0	16590.0
+Singapore		15.0	72.0	5448.0
+Manila		9.0	23.0	1628.0
+Bangkok		19.0	103.0	8127.0
+Jacarta		22.0	120.0	9615.0
+Calcutta		13.0	59.0	4424.0
+Bombay		27.0	155.0	12296.0
+Delhi		34.0	206.0	16547.0
+Madras		16.0	78.0	6127.0
+Seoul		23.0	126.0	9991.0
+Teheran		20.0	110.0	8716.0
+Karachi		43.0	257.0	20842.0
+Cairo		33.0	191.0	15228.0
+Lagos		26.0	149.0	11915.0
+Kinshasa		26.0	148.0	11897.0
+Johannesburg		13.0	56.0	4366.0
+Casablanca		10.0	46.0	3304.0
+Mexico		42.0	256.0	20702.0
+Bogota		17.0	84.0	6677.0
+Havana		9.0	28.0	2069.0
+Caracas		14.0	62.0	4774.0
+Lima		20.0	110.0	8760.0
+Santiago		14.0	62.0	4836.0
+Buenos Aires		31.0	178.0	14291.0
+Rio de Janeiro		27.0	156.0	12437.0
+Sao Paulo		26.0	147.0	11722.0
+Honolulu		9.0	15.0	929.0
+Sydney		14.0	62.0	4764.0
+Melbourne		13.0	57.0	4370.0
+Perth		9.0	27.0	1985.0
+Wellington		9.0	9.0	161.0
+Montreal		12.0	55.0	4060.0
+New York		20.0	107.0	8364.0
+Los Angeles		34.0	201.0	16165.0
+Washington		15.0	73.0	5772.0
+Houston		16.0	80.0	6217.0
+Chicago		22.0	119.0	9385.0
+San Francisco		20.0	108.0	8479.0
+Atlanta		15.0	69.0	5373.0
+Capetown		9.0	9.0	416.0
+
+London		17.0	97.0	11863.0
+Paris		18.0	100.0	12287.0
+Rome		9.0	25.0	2840.0
+Berlin		9.0	30.0	3430.0
+Madrid		9.0	27.0	3105.0
+Warsaw		9.0	16.0	1701.0
+Budapest		9.0	16.0	1708.0
+Sofia		9.0	14.0	1407.0
+Stockholm		9.0	9.0	899.0
+Hong-Kong		12.0	59.0	7000.0
+Tokyo		18.0	109.0	13347.0
+Peking		27.0	167.0	20956.0
+Shanghai		22.0	134.0	16675.0
+Singapore		10.0	48.0	5477.0
+Manila		9.0	16.0	1635.0
+Bangkok		14.0	67.0	8168.0
+Jacarta		15.0	77.0	9665.0
+Calcutta		9.0	40.0	4447.0
+Bombay		18.0	100.0	12360.0
+Delhi		22.0	134.0	16631.0
+Madras		11.0	52.0	6158.0
+Seoul		16.0	82.0	10042.0
+Teheran		14.0	71.0	8761.0
+Karachi		27.0	167.0	20948.0
+Cairo		21.0	124.0	15307.0
+Lagos		17.0	98.0	11975.0
+Kinshasa		17.0	97.0	11957.0
+Johannesburg		9.0	38.0	4388.0
+Casablanca		9.0	30.0	3321.0
+Mexico		27.0	165.0	20808.0
+Bogota		12.0	55.0	6711.0
+Havana		9.0	18.0	2079.0
+Caracas		9.0	43.0	4798.0
+Lima		14.0	71.0	8805.0
+Santiago		9.0	43.0	4860.0
+Buenos Aires		20.0	116.0	14364.0
+Rio de Janeiro		18.0	100.0	12502.0
+Sao Paulo		17.0	96.0	11782.0
+Honolulu		9.0	10.0	934.0
+Sydney		9.0	43.0	4788.0
+Melbourne		9.0	39.0	4392.0
+Perth		9.0	18.0	1994.0
+Wellington		9.0	9.0	161.0
+Montreal		9.0	36.0	4082.0
+New York		14.0	70.0	8407.0
+Los Angeles		22.0	130.0	16248.0
+Washington		10.0	49.0	5801.0
+Houston		11.0	53.0	6249.0
+Chicago		15.0	77.0	9434.0
+San Francisco		14.0	70.0	8523.0
+Atlanta		10.0	47.0	5400.0
+Capetown		9.0	9.0	416.0
+
+London		12.0	64.0	11901.0
+Paris		13.0	64.0	12328.0
+Rome		9.0	17.0	2848.0
+Berlin		9.0	19.0	3441.0
+Madrid		9.0	18.0	3114.0
+Warsaw		9.0	11.0	1706.0
+Budapest		9.0	11.0	1713.0
+Sofia		9.0	9.0	1412.0
+Stockholm		9.0	9.0	899.0
+Hong-Kong		9.0	39.0	7023.0
+Tokyo		13.0	70.0	13391.0
+Peking		18.0	108.0	21024.0
+Shanghai		15.0	86.0	16730.0
+Singapore		9.0	31.0	5495.0
+Manila		9.0	11.0	1640.0
+Bangkok		9.0	46.0	8194.0
+Jacarta		10.0	51.0	9696.0
+Calcutta		9.0	25.0	4462.0
+Bombay		13.0	64.0	12401.0
+Delhi		15.0	86.0	16686.0
+Madras		9.0	34.0	6178.0
+Seoul		11.0	55.0	10074.0
+Teheran		9.0	47.0	8790.0
+Karachi		18.0	108.0	21016.0
+Cairo		15.0	80.0	15357.0
+Lagos		12.0	64.0	12014.0
+Kinshasa		12.0	64.0	11995.0
+Johannesburg		9.0	25.0	4401.0
+Casablanca		9.0	19.0	3332.0
+Mexico		18.0	107.0	20875.0
+Bogota		9.0	36.0	6733.0
+Havana		9.0	13.0	2084.0
+Caracas		9.0	27.0	4814.0
+Lima		9.0	47.0	8834.0
+Santiago		9.0	27.0	4876.0
+Buenos Aires		14.0	75.0	14411.0
+Rio de Janeiro		13.0	64.0	12543.0
+Sao Paulo		12.0	63.0	11820.0
+Honolulu		9.0	9.0	935.0
+Sydney		9.0	27.0	4804.0
+Melbourne		9.0	25.0	4406.0
+Perth		9.0	13.0	1999.0
+Wellington		9.0	9.0	161.0
+Montreal		9.0	23.0	4095.0
+New York		9.0	47.0	8435.0
+Los Angeles		15.0	83.0	16302.0
+Washington		9.0	32.0	5819.0
+Houston		9.0	35.0	6269.0
+Chicago		10.0	51.0	9465.0
+San Francisco		9.0	47.0	8551.0
+Atlanta		9.0	30.0	5418.0
+Capetown		9.0	9.0	416.0
+
+London		9.0	42.0	11926.0
+Paris		9.0	43.0	12353.0
+Rome		9.0	12.0	2853.0
+Berlin		9.0	14.0	3446.0
+Madrid		9.0	13.0	3119.0
+Warsaw		9.0	9.0	1708.0
+Budapest		9.0	9.0	1715.0
+Sofia		9.0	9.0	1412.0
+Stockholm		9.0	9.0	899.0
+Hong-Kong		9.0	25.0	7037.0
+Tokyo		9.0	46.0	13419.0
+Peking		13.0	70.0	21067.0
+Shanghai		10.0	57.0	16764.0
+Singapore		9.0	20.0	5506.0
+Manila		9.0	9.0	1642.0
+Bangkok		9.0	29.0	8211.0
+Jacarta		9.0	33.0	9715.0
+Calcutta		9.0	17.0	4470.0
+Bombay		9.0	43.0	12426.0
+Delhi		10.0	57.0	16720.0
+Madras		9.0	22.0	6190.0
+Seoul		9.0	36.0	10095.0
+Teheran		9.0	30.0	8807.0
+Karachi		13.0	70.0	21059.0
+Cairo		10.0	53.0	15389.0
+Lagos		9.0	42.0	12039.0
+Kinshasa		9.0	42.0	12020.0
+Johannesburg		9.0	17.0	4409.0
+Casablanca		9.0	14.0	3337.0
+Mexico		13.0	69.0	20918.0
+Bogota		9.0	23.0	6746.0
+Havana		9.0	9.0	2088.0
+Caracas		9.0	18.0	4823.0
+Lima		9.0	30.0	8851.0
+Santiago		9.0	18.0	4885.0
+Buenos Aires		9.0	51.0	14440.0
+Rio de Janeiro		9.0	43.0	12568.0
+Sao Paulo		9.0	41.0	11845.0
+Honolulu		9.0	9.0	935.0
+Sydney		9.0	18.0	4813.0
+Melbourne		9.0	17.0	4414.0
+Perth		9.0	9.0	2003.0
+Wellington		9.0	9.0	161.0
+Montreal		9.0	16.0	4102.0
+New York		9.0	30.0	8452.0
+Los Angeles		10.0	55.0	16335.0
+Washington		9.0	21.0	5830.0
+Houston		9.0	23.0	6281.0
+Chicago		9.0	33.0	9484.0
+San Francisco		9.0	30.0	8568.0
+Atlanta		9.0	19.0	5429.0
+Capetown		9.0	9.0	416.0
+
+London		9.0	27.0	11941.0
+Paris		9.0	27.0	12369.0
+Rome		9.0	9.0	2856.0
+Berlin		9.0	9.0	3451.0
+Madrid		9.0	9.0	3123.0
+Warsaw		9.0	9.0	1708.0
+Budapest		9.0	9.0	1715.0
+Sofia		9.0	9.0	1412.0
+Stockholm		9.0	9.0	899.0
+Hong-Kong		9.0	17.0	7045.0
+Tokyo		9.0	29.0	13436.0
+Peking		9.0	46.0	21095.0
+Shanghai		9.0	36.0	16786.0
+Singapore		9.0	14.0	5512.0
+Manila		9.0	9.0	1642.0
+Bangkok		9.0	19.0	8221.0
+Jacarta		9.0	21.0	9727.0
+Calcutta		9.0	12.0	4475.0
+Bombay		9.0	27.0	12442.0
+Delhi		9.0	36.0	16742.0
+Madras		9.0	15.0	6197.0
+Seoul		9.0	23.0	10108.0
+Teheran		9.0	19.0	8818.0
+Karachi		9.0	46.0	21087.0
+Cairo		9.0	34.0	15409.0
+Lagos		9.0	27.0	12054.0
+Kinshasa		9.0	27.0	12035.0
+Johannesburg		9.0	12.0	4414.0
+Casablanca		9.0	9.0	3342.0
+Mexico		9.0	46.0	20945.0
+Bogota		9.0	16.0	6753.0
+Havana		9.0	9.0	2088.0
+Caracas		9.0	13.0	4828.0
+Lima		9.0	19.0	8862.0
+Santiago		9.0	13.0	4890.0
+Buenos Aires		9.0	32.0	14459.0
+Rio de Janeiro		9.0	27.0	12584.0
+Sao Paulo		9.0	26.0	11860.0
+Honolulu		9.0	9.0	935.0
+Sydney		9.0	13.0	4818.0
+Melbourne		9.0	12.0	4419.0
+Perth		9.0	9.0	2003.0
+Wellington		9.0	9.0	161.0
+Montreal		9.0	11.0	4107.0
+New York		9.0	19.0	8463.0
+Los Angeles		9.0	35.0	16356.0
+Washington		9.0	15.0	5836.0
+Houston		9.0	16.0	6288.0
+Chicago		9.0	21.0	9496.0
+San Francisco		9.0	19.0	8579.0
+Atlanta		9.0	14.0	5434.0
+Capetown		9.0	9.0	416.0
+
+London		9.0	18.0	11950.0
+Paris		9.0	18.0	12378.0
+Rome		9.0	9.0	2856.0
+Berlin		9.0	9.0	3451.0
+Madrid		9.0	9.0	3123.0
+Warsaw		9.0	9.0	1708.0
+Budapest		9.0	9.0	1715.0
+Sofia		9.0	9.0	1412.0
+Stockholm		9.0	9.0	899.0
+Hong-Kong		9.0	12.0	7050.0
+Tokyo		9.0	19.0	13446.0
+Peking		9.0	29.0	21112.0
+Shanghai		9.0	23.0	16799.0
+Singapore		9.0	9.0	5517.0
+Manila		9.0	9.0	1642.0
+Bangkok		9.0	14.0	8226.0
+Jacarta		9.0	15.0	9733.0
+Calcutta		9.0	9.0	4478.0
+Bombay		9.0	18.0	12451.0
+Delhi		9.0	23.0	16755.0
+Madras		9.0	10.0	6202.0
+Seoul		9.0	16.0	10115.0
+Teheran		9.0	14.0	8823.0
+Karachi		9.0	29.0	21104.0
+Cairo		9.0	22.0	15421.0
+Lagos		9.0	18.0	12063.0
+Kinshasa		9.0	18.0	12044.0
+Johannesburg		9.0	9.0	4417.0
+Casablanca		9.0	9.0	3342.0
+Mexico		9.0	29.0	20962.0
+Bogota		9.0	11.0	6758.0
+Havana		9.0	9.0	2088.0
+Caracas		9.0	9.0	4832.0
+Lima		9.0	14.0	8867.0
+Santiago		9.0	9.0	4894.0
+Buenos Aires		9.0	21.0	14470.0
+Rio de Janeiro		9.0	18.0	12593.0
+Sao Paulo		9.0	17.0	11869.0
+Honolulu		9.0	9.0	935.0
+Sydney		9.0	9.0	4822.0
+Melbourne		9.0	9.0	4422.0
+Perth		9.0	9.0	2003.0
+Wellington		9.0	9.0	161.0
+Montreal		9.0	9.0	4109.0
+New York		9.0	14.0	8468.0
+Los Angeles		9.0	23.0	16368.0
+Washington		9.0	10.0	5841.0
+Houston		9.0	11.0	6293.0
+Chicago		9.0	15.0	9502.0
+San Francisco		9.0	14.0	8584.0
+Atlanta		9.0	9.0	5439.0
+Capetown		9.0	9.0	416.0
+
+London		9.0	13.0	11955.0
+Paris		9.0	13.0	12383.0
+Rome		9.0	9.0	2856.0
+Berlin		9.0	9.0	3451.0
+Madrid		9.0	9.0	3123.0
+Warsaw		9.0	9.0	1708.0
+Budapest		9.0	9.0	1715.0
+Sofia		9.0	9.0	1412.0
+Stockholm		9.0	9.0	899.0
+Hong-Kong		9.0	9.0	7053.0
+Tokyo		9.0	14.0	13451.0
+Peking		9.0	19.0	21122.0
+Shanghai		9.0	16.0	16806.0
+Singapore		9.0	9.0	5517.0
+Manila		9.0	9.0	1642.0
+Bangkok		9.0	9.0	8231.0
+Jacarta		9.0	10.0	9738.0
+Calcutta		9.0	9.0	4478.0
+Bombay		9.0	13.0	12456.0
+Delhi		9.0	16.0	16762.0
+Madras		9.0	9.0	6203.0
+Seoul		9.0	11.0	10120.0
+Teheran		9.0	9.0	8828.0
+Karachi		9.0	19.0	21114.0
+Cairo		9.0	15.0	15428.0
+Lagos		9.0	13.0	12068.0
+Kinshasa		9.0	13.0	12049.0
+Johannesburg		9.0	9.0	4417.0
+Casablanca		9.0	9.0	3342.0
+Mexico		9.0	19.0	20972.0
+Bogota		9.0	9.0	6760.0
+Havana		9.0	9.0	2088.0
+Caracas		9.0	9.0	4832.0
+Lima		9.0	9.0	8872.0
+Santiago		9.0	9.0	4894.0
+Buenos Aires		9.0	15.0	14476.0
+Rio de Janeiro		9.0	13.0	12598.0
+Sao Paulo		9.0	12.0	11874.0
+Honolulu		9.0	9.0	935.0
+Sydney		9.0	9.0	4822.0
+Melbourne		9.0	9.0	4422.0
+Perth		9.0	9.0	2003.0
+Wellington		9.0	9.0	161.0
+Montreal		9.0	9.0	4109.0
+New York		9.0	9.0	8473.0
+Los Angeles		9.0	16.0	16375.0
+Washington		9.0	9.0	5842.0
+Houston		9.0	9.0	6295.0
+Chicago		9.0	10.0	9507.0
+San Francisco		9.0	9.0	8589.0
+Atlanta		9.0	9.0	5439.0
+Capetown		9.0	9.0	416.0
+
+London		9.0	9.0	11959.0
+Paris		9.0	9.0	12387.0
+Rome		9.0	9.0	2856.0
+Berlin		9.0	9.0	3451.0
+Madrid		9.0	9.0	3123.0
+Warsaw		9.0	9.0	1708.0
+Budapest		9.0	9.0	1715.0
+Sofia		9.0	9.0	1412.0
+Stockholm		9.0	9.0	899.0
+Hong-Kong		9.0	9.0	7053.0
+Tokyo		9.0	9.0	13456.0
+Peking		9.0	14.0	21127.0
+Shanghai		9.0	11.0	16811.0
+Singapore		9.0	9.0	5517.0
+Manila		9.0	9.0	1642.0
+Bangkok		9.0	9.0	8231.0
+Jacarta		9.0	9.0	9739.0
+Calcutta		9.0	9.0	4478.0
+Bombay		9.0	9.0	12460.0
+Delhi		9.0	11.0	16767.0
+Madras		9.0	9.0	6203.0
+Seoul		9.0	9.0	10122.0
+Teheran		9.0	9.0	8828.0
+Karachi		9.0	14.0	21119.0
+Cairo		9.0	10.0	15433.0
+Lagos		9.0	9.0	12072.0
+Kinshasa		9.0	9.0	12053.0
+Johannesburg		9.0	9.0	4417.0
+Casablanca		9.0	9.0	3342.0
+Mexico		9.0	14.0	20977.0
+Bogota		9.0	9.0	6760.0
+Havana		9.0	9.0	2088.0
+Caracas		9.0	9.0	4832.0
+Lima		9.0	9.0	8872.0
+Santiago		9.0	9.0	4894.0
+Buenos Aires		9.0	10.0	14481.0
+Rio de Janeiro		9.0	9.0	12602.0
+Sao Paulo		9.0	9.0	11877.0
+Honolulu		9.0	9.0	935.0
+Sydney		9.0	9.0	4822.0
+Melbourne		9.0	9.0	4422.0
+Perth		9.0	9.0	2003.0
+Wellington		9.0	9.0	161.0
+Montreal		9.0	9.0	4109.0
+New York		9.0	9.0	8473.0
+Los Angeles		9.0	11.0	16380.0
+Washington		9.0	9.0	5842.0
+Houston		9.0	9.0	6295.0
+Chicago		9.0	9.0	9508.0
+San Francisco		9.0	9.0	8589.0
+Atlanta		9.0	9.0	5439.0
+Capetown		9.0	9.0	416.0
+
+London		9.0	9.0	11959.0
+Paris		9.0	9.0	12387.0
+Rome		9.0	9.0	2856.0
+Berlin		9.0	9.0	3451.0
+Madrid		9.0	9.0	3123.0
+Warsaw		9.0	9.0	1708.0
+Budapest		9.0	9.0	1715.0
+Sofia		9.0	9.0	1412.0
+Stockholm		9.0	9.0	899.0
+Hong-Kong		9.0	9.0	7053.0
+Tokyo		9.0	9.0	13456.0
+Peking		9.0	9.0	21132.0
+Shanghai		9.0	9.0	16813.0
+Singapore		9.0	9.0	5517.0
+Manila		9.0	9.0	1642.0
+Bangkok		9.0	9.0	8231.0
+Jacarta		9.0	9.0	9739.0
+Calcutta		9.0	9.0	4478.0
+Bombay		9.0	9.0	12460.0
+Delhi		9.0	9.0	16769.0
+Madras		9.0	9.0	6203.0
+Seoul		9.0	9.0	10122.0
+Teheran		9.0	9.0	8828.0
+Karachi		9.0	9.0	21124.0
+Cairo		9.0	9.0	15434.0
+Lagos		9.0	9.0	12072.0
+Kinshasa		9.0	9.0	12053.0
+Johannesburg		9.0	9.0	4417.0
+Casablanca		9.0	9.0	3342.0
+Mexico		9.0	9.0	20982.0
+Bogota		9.0	9.0	6760.0
+Havana		9.0	9.0	2088.0
+Caracas		9.0	9.0	4832.0
+Lima		9.0	9.0	8872.0
+Santiago		9.0	9.0	4894.0
+Buenos Aires		9.0	9.0	14482.0
+Rio de Janeiro		9.0	9.0	12602.0
+Sao Paulo		9.0	9.0	11877.0
+Honolulu		9.0	9.0	935.0
+Sydney		9.0	9.0	4822.0
+Melbourne		9.0	9.0	4422.0
+Perth		9.0	9.0	2003.0
+Wellington		9.0	9.0	161.0
+Montreal		9.0	9.0	4109.0
+New York		9.0	9.0	8473.0
+Los Angeles		9.0	9.0	16382.0
+Washington		9.0	9.0	5842.0
+Houston		9.0	9.0	6295.0
+Chicago		9.0	9.0	9508.0
+San Francisco		9.0	9.0	8589.0
+Atlanta		9.0	9.0	5439.0
+Capetown		9.0	9.0	416.0
+
