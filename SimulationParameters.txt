@@ -5,3 +5,9 @@ Simulation parameters
 0.1	PvoyageS	Probabilité de prendre un avion dans la journée pour chaque habitant S
 0.1	PvoyageI	Probabilité de prendre un avion dans la journée pour chaque habitant I
 0.1	PvoyageR	Probabilité de prendre un avion dans la journée pour chaque habitant R
+0.01	PdS		Probabilité de mourir en étant sain
+0.1		PdI		Probabilité de mourir en étant infecté
+0.01	PdR		Probabilité de mourir en étant retiré
+0.02	PbS		Probabilité de se reproduire en étant sain
+0.01	PbI		Probabilité de se reproduire en étant infecté
+0.02	PbR		Probabilité de se reproduire en étant retiré

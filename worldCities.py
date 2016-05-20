@@ -103,10 +103,10 @@ class worldCities:
 	
 	
 	##### S'assurer du nombre de personnes constant en absence de naissances #####
-        worldPopulation=0
-        for i in self.indice:
-            worldPopulation+=self.R[i]+self.I[i]+self.S[i]
-        print "After infection",worldPopulation
+        #worldPopulation=0
+        #for i in self.indice:
+        #    worldPopulation+=self.R[i]+self.I[i]+self.S[i]
+        #print "After infection",worldPopulation
     
     
     
@@ -126,9 +126,16 @@ class worldCities:
             sauvegardeR.append(self.R[i])
             sauvegardeI.append(self.I[i])
             sauvegardeS.append(self.S[i])
-        
+        #print "En 5=",sauvegardeS[5]
         
         ##### Population mouvements #####
+        
+        #worldPopulation=0
+        #for i in self.indice:
+        #    worldPopulation+=self.R[i]+self.I[i]+self.S[i]
+        #print "Before move",worldPopulation
+        
+        
         """
         Chaque etat S, I et R a sa propre probabilite de voyage pour l'instant.
         Ainsi, dans chaque ville, on envoie une proportion PvoyageR de la population
@@ -141,24 +148,65 @@ class worldCities:
         Pour chaque ville i, on fait arriver des gens de toutes les villes j. On aura
         aussi forcement un depart avec une probabilite PvoyageR de la population R de
         la ville. D'ou le dernier calcul.
-        """   
-        
+        """
         for i in self.indice:
             for j in self.indice:
-                if i!=j:
+                if j>i: #Car matrice diagonale, en considérant des allers et retours équivalents d'une ville à l'autre
+                    
+                    #Arrivées dans la ville i
                     self.R[i]+=(sauvegardeR[j]*PvoyageR*self.fly[i][j])//1
                     self.I[i]+=(sauvegardeI[j]*PvoyageI*self.fly[i][j])//1
                     self.S[i]+=(sauvegardeS[j]*PvoyageS*self.fly[i][j])//1
-            self.R[i]-=(sauvegardeR[j]*PvoyageR)//1
-            self.I[i]-=(sauvegardeI[j]*PvoyageI)//1
-            self.S[i]-=(sauvegardeS[j]*PvoyageS)//1
+                                        
+                    #Départ de la ville i
+                    self.R[i]-=(sauvegardeR[i]*PvoyageR*self.fly[i][j])//1
+                    self.I[i]-=(sauvegardeI[j]*PvoyageI*self.fly[i][j])//1
+                    self.S[i]-=(sauvegardeS[j]*PvoyageS*self.fly[i][j])//1
+                    
+                    #Arrivées dans la ville j
+                    self.R[j]+=(sauvegardeR[i]*PvoyageR*self.fly[i][j])//1
+                    self.I[j]+=(sauvegardeI[i]*PvoyageI*self.fly[i][j])//1
+                    self.S[j]+=(sauvegardeS[i]*PvoyageS*self.fly[i][j])//1
+                    
+                    #Départ de la ville j
+                    self.R[j]-=(sauvegardeR[j]*PvoyageR*self.fly[i][j])//1
+                    self.I[j]-=(sauvegardeI[j]*PvoyageI*self.fly[i][j])//1
+                    self.S[j]-=(sauvegardeS[j]*PvoyageS*self.fly[i][j])//1
 
+            print "Ville : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i]
 
     	##### S'assurer du nombre de personnes constant en absence de naissances #####
-        worldPopulation=0
+        #worldPop=0
+        #for i in self.indice:
+        #    worldPop+=self.R[i]+self.I[i]+self.S[i]
+        #print "After mouvement ",worldPop
+        #print "Diff=",worldPopulation-worldPop #Des écarts de moins de 1000 personnes à cause des arrondis selon moi
+
+
+
+
+    #####################################################################################
+    ############### Classe de mouvement des populations entre villes ####################
+    #####################################################################################
+    def death(self):
+
         for i in self.indice:
-            worldPopulation+=self.R[i]+self.I[i]+self.S[i]
-        print "After mouvement ",worldPopulation
+                    
+            #Death in the city i
+            self.R[i]-=(self.R[i]*self.PdR)//1
+            self.I[i]-=(self.I[i]*self.PdI)//1
+            self.S[i]-=(self.S[i]*self.PdS)//1                    
+            print "Ville : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i]
+
+    def birth(self):
+
+        for i in self.indice:
+                    
+            #Death in the city i
+            self.R[i]+=(self.R[i]*self.PbR)//1
+            self.I[i]+=(self.I[i]*self.PbI)//1
+            self.S[i]+=(self.S[i]*self.PbS)//1                    
+            print "Ville : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i]
 
 
 
@@ -184,6 +232,9 @@ class simulation:
             self.PvoyageS=float(content[4])
             self.PvoyageI=float(content[5])
             self.PvoyageR=float(content[6])
+            self.PdS=float(content[7])
+            self.PdI=float(content[8])
+            self.PdR=float(content[9])
             
 """
 Ps, Pi et Pr fixent les probabilites initiales d'etre infecte initialement,
@@ -197,6 +248,9 @@ s=simulation("SimulationParameters.txt")
 print "AVANT DEBUT DE CONTAMINATION"
 worldmap=worldCities('Population.csv','FlyFrequency.csv')
 for i in xrange(20): #20 iterations dans lesquelles on a 5 iterations d'infection entre chaque processus de mouvement
+    print "ITERATION ",i
+    worldmap.death()
+    worldmap.birth()
     worldmap.infection(s.Psi,s.Pir,5) #On pourrait apres rentrer une maladie en parametre a la place de Psi et Pri et c'est la maladie meme qui definirait les probabilites Psi et Pri
     worldmap.transport(s.PvoyageS,s.PvoyageI,s.PvoyageR) #Mouvement des populations par transport
     
