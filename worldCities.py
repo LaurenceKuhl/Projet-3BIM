@@ -18,12 +18,16 @@ class worldCities:
             contents = csv.reader(file)
             pop = list()
             for row in contents:
-		pop.append(row)        
-                                
+							pop.append(row)        
+            
+            print pop                    
+            
             for i in xrange(0,3): #Supprimer les 4 premieres et 3 dernieres lignes
                 pop.pop(0)
                 pop.pop(-1)
             pop.pop(0)
+            
+            
 
             for i in xrange(len(pop)): #Separation du tableau pop
                 for j in xrange(1,6):
@@ -255,17 +259,17 @@ print "AVANT DEBUT DE CONTAMINATION"
 worldmap=worldCities('Population.csv','FlyFrequency.csv')
 
 fich=open("OutputPopulations.txt","w")
-fich.writelines("Name\t\t S \t I \t R \t Total \n\n")
+fich.writelines("Name\t S \t I \t R \t Total \t Time \n\n")
 for i in xrange(20): #20 iterations dans lesquelles on a 5 iterations d'infection entre chaque processus de mouvement
 
 	print "ITERATION ",i
-	#worldmap.death(s.PdR,s.PdI,s.PdS)
-	#worldmap.birth(s.PbR,s.PbI,s.PbS)
+	worldmap.death(s.PdR,s.PdI,s.PdS)
+	worldmap.birth(s.PbR,s.PbI,s.PbS)
 	worldmap.infection(s.Psi,s.Pir,5) #On pourrait apres rentrer une maladie en parametre a la place de Psi et Pri et c'est la maladie meme qui definirait les probabilites Psi et Pri
-	#worldmap.transport(s.PvoyageS,s.PvoyageI,s.PvoyageR) #Mouvement des populations par transport
+	worldmap.transport(s.PvoyageS,s.PvoyageI,s.PvoyageR) #Mouvement des populations par transport
 	
 	for j in worldmap.indice:
-		contenu=str(worldmap.name[j])+'\t\t'+str(worldmap.S[j])+'\t'+str(worldmap.I[j])+'\t'+str(worldmap.R[j])+'\n';
+		contenu=str(worldmap.name[j])+'\t'+str(worldmap.S[j])+'\t'+str(worldmap.I[j])+'\t'+str(worldmap.R[j])+'\t'+str(worldmap.R[j]+worldmap.I[j]+worldmap.S[j])+'\t'+str(i)+'\n';
 		fich.writelines(contenu)
 	fich.writelines('\n')
     
