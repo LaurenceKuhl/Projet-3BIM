@@ -11,30 +11,31 @@ class worldCities:
     #####################################################################################
     ################# Definition of all the cities and their parameters #################
     ##################################################################################### 
-    def __init__(self,fieldPop,fieldFly):
+    def __init__(self,fieldPop,fieldFly,nbrCriteres):
         
 	#####Recuperation des donnees des villes #####
         with open(fieldPop,'rb') as file: #Lecture du fichier
             contents = csv.reader(file)
             pop = list()
             for row in contents:
-							pop.append(row)        
+                pop.append(row)        
             
-            print pop                    
+            #print pop                    
             
             for i in xrange(0,3): #Supprimer les 4 premieres et 3 dernieres lignes
                 pop.pop(0)
                 pop.pop(-1)
             pop.pop(0)
             
-            
-
             for i in xrange(len(pop)): #Separation du tableau pop
-                for j in xrange(1,6):
+                print nbrCriteres
+                for j in xrange(1,nbrCriteres-1):
                     pop[i].append(float(pop[i][0].split(";")[j]))
-                pop[i].append(pop[i][0].split(";")[6])
+                pop[i].append(pop[i][0].split(";")[nbrCriteres-1])
                 pop[i][0]=pop[i][0].split(";")[0]
                 #Faut il fermer le fichier
+            
+            #print pop
 
 
 	   #Creation de tableaux de noms, indices, populations... dont les lignes correspondent aux differentes villes
@@ -49,19 +50,19 @@ class worldCities:
             self.latitude=[]
             self.longitude=[]
             for i in xrange(len(pop)):
-				self.name.append(pop[i][0])
-				self.indice.append(int(pop[i][1])-1)
-				self.population.append(pop[i][3])
-				self.S.append(self.population[i])
-				self.I.append(0)
-				self.R.append(0)
-				self.density.append(pop[i][5])
-				self.area.append((self.S[i]+self.I[i]+self.R[i])/self.density[i]) #Peut etre inutile
-				self.latitude.append(pop[i][7])
-				self.longitude.append(pop[i][8])
-				#print "Ville a t0 : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i]
-				self.nbrCities=len(self.name)
-	
+                self.name.append(pop[i][0])
+                self.indice.append(int(pop[i][1])-1)
+                self.population.append(pop[i][3])
+                self.S.append(self.population[i])
+                self.I.append(0)
+                self.R.append(0)
+                self.density.append(pop[i][5])
+                self.area.append((self.S[i]+self.I[i]+self.R[i])/self.density[i]) #Peut etre inutile
+                self.latitude.append(pop[i][6])
+                self.longitude.append(pop[i][7])
+                #print "Ville a t0 : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i]
+                self.nbrCities=len(self.name)
+            print self.R
 	
 	##### Import airplane flies matrix #####
         with open(fieldFly,'rb') as file:
@@ -233,8 +234,8 @@ class simulation:
         ##### Import parameters #####
         with open(field,'r') as f:
             content = f.readlines()
-            print content
-            print len(content)
+            #print content
+            #print len(content)
             for i in range(len(content)):
                 content[i]=content[i].split("\t")[0]
             self.Psi=float(content[2])
@@ -245,9 +246,10 @@ class simulation:
             self.PdS=float(content[7])
             self.PdI=float(content[8])
             self.PdR=float(content[9])
-            self.PbS=float(content[7])
-            self.PbI=float(content[8])
-            self.PbR=float(content[9])
+            self.PbS=float(content[10])
+            self.PbI=float(content[11])
+            self.PbR=float(content[12])
+            self.nombreCriteres=int(content[13])
             
 """
 Ps, Pi et Pr fixent les probabilites initiales d'etre infecte initialement,
@@ -260,7 +262,7 @@ Pir = Proba qu'un infecte devienne resistant
 print '##### PROJET 3BIM - INSA Lyon - Bosc, Greugny, Jaouen, Kuhlburger #####'
 s=simulation("SimulationParameters.txt")
 print "AVANT DEBUT DE CONTAMINATION"
-worldmap=worldCities('Population.csv','FlyFrequency.csv')
+worldmap=worldCities('Population.csv','FlyFrequency.csv',s.nombreCriteres)
 
 fich=open("OutputPopulations.txt","w")
 fich.writelines("Name\t S \t I \t R \t Total \t Time \n\n")
