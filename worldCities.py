@@ -164,8 +164,8 @@ class worldCities:
                                         
                     #Départ de la ville i
                     self.R[i]-=(sauvegardeR[i]*PvoyageR*self.fly[i][j])//1
-                    self.I[i]-=(sauvegardeI[j]*PvoyageI*self.fly[i][j])//1
-                    self.S[i]-=(sauvegardeS[j]*PvoyageS*self.fly[i][j])//1
+                    self.I[i]-=(sauvegardeI[i]*PvoyageI*self.fly[i][j])//1
+                    self.S[i]-=(sauvegardeS[i]*PvoyageS*self.fly[i][j])//1
                     
                     #Arrivées dans la ville j
                     self.R[j]+=(sauvegardeR[i]*PvoyageR*self.fly[i][j])//1
