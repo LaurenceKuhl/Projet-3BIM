@@ -46,17 +46,21 @@ class worldCities:
             self.R=[]
             self.density=[]
             self.area=[]
+            self.latitude=[]
+            self.longitude=[]
             for i in xrange(len(pop)):
-		self.name.append(pop[i][0])
-		self.indice.append(int(pop[i][1])-1)
-		self.population.append(pop[i][3])
-		self.S.append(self.population[i])
-		self.I.append(0)
-		self.R.append(0)
-		self.density.append(pop[i][5])
-		self.area.append((self.S[i]+self.I[i]+self.R[i])/self.density[i]) #Peut etre inutile
-		#print "Ville a t0 : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i]
-	    self.nbrCities=len(self.name)
+				self.name.append(pop[i][0])
+				self.indice.append(int(pop[i][1])-1)
+				self.population.append(pop[i][3])
+				self.S.append(self.population[i])
+				self.I.append(0)
+				self.R.append(0)
+				self.density.append(pop[i][5])
+				self.area.append((self.S[i]+self.I[i]+self.R[i])/self.density[i]) #Peut etre inutile
+				self.latitude.append(pop[i][7])
+				self.longitude.append(pop[i][8])
+				#print "Ville a t0 : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i]
+				self.nbrCities=len(self.name)
 	
 	
 	##### Import airplane flies matrix #####
