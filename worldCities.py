@@ -192,6 +192,56 @@ class worldCities:
         #print "Diff=",worldPopulation-worldPop #Des écarts de moins de 1000 personnes à cause des arrondis selon moi
 
 
+    #methode de transport avec populations des villes constantes et modification des proportions
+    #Dans un premier temps j'ai gardé les tableaux S I et R comme au début
+    #Ensuite on stockera directement les proportions à l'intérieur
+    def transportbis(self,PvoyageS,PvoyageI,PvoyageR):
+         ##### Safeguard before first move #####
+        sauvegardeR=[]
+        sauvegardeI=[]
+        sauvegardeS=[]
+
+        for i in self.indice:
+            sauvegardeR.append(self.R[i])
+            sauvegardeI.append(self.I[i])
+            sauvegardeS.append(self.S[i])
+
+        for i in self.indice:
+            for j in self.indice:
+                if j>i:
+
+                    #Calcul des proportions d'individus S,I et R dans les deux villes
+                    tSi_old = sauvegardeS[i]/self.population[i]
+                    tSj_old = sauvegardeS[j]/self.population[j]
+
+                    tIi_old = sauvegardeI[i]/self.population[i]
+                    tIj_old = sauvegardeI[j]/self.population[j]
+
+                    tRi_old = sauvegardeR[i]/self.population[i]
+                    tRj_old = sauvegardeR[j]/self.population[j]
+
+                    #Voyage des S
+                    tSi_new =(tSi_old*self.population[i]+tSj_old*self.population[j]*PvoyageS*self.fly[i][j])/(self.population[i]+self.population[j]*PvoyageS*self.fly[i][j])
+                    tSj_new =(tSj_old*self.population[j]+tSi_old*self.population[i]*PvoyageS*self.fly[i][j])/(self.population[j]+self.population[i]*PvoyageS*self.fly[i][j])
+
+                    #Voyage des I
+                    tIi_new =(tIi_old*self.population[i]+tIj_old*self.population[j]*PvoyageI*self.fly[i][j])/(self.population[i]+self.population[j]*PvoyageI*self.fly[i][j])
+                    tIj_new =(tIj_old*self.population[j]+tIi_old*self.population[i]*PvoyageI*self.fly[i][j])/(self.population[j]+self.population[i]*PvoyageI*self.fly[i][j])
+
+                    #Voyage des R
+                    tRi_new =(tRi_old*self.population[i]+tRj_old*self.population[j]*PvoyageR*self.fly[i][j])/(self.population[i]+self.population[j]*PvoyageR*self.fly[i][j])
+                    tRj_new =(tRj_old*self.population[j]+tRi_old*self.population[i]*PvoyageR*self.fly[i][j])/(self.population[j]+self.population[i]*PvoyageR*self.fly[i][j])
+
+                    #Changement des populations S I et R des deux villes
+                    self.S[i] = (tSi_new * self.population[i])//1
+                    self.S[j] = (tSj_new * self.population[j])//1
+                    self.I[i] = (tIi_new * self.population[i])//1
+                    self.I[j] = (tIj_new * self.population[j])//1
+                    self.R[i] = (tRi_new * self.population[i])//1
+                    self.R[j] = (tRj_new * self.population[j])//1
+
+            print "Ville : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i]
+
 
 
     #####################################################################################
@@ -272,7 +322,7 @@ for i in xrange(20): #20 iterations dans lesquelles on a 5 iterations d'infectio
 	worldmap.death(s.PdR,s.PdI,s.PdS)
 	worldmap.birth(s.PbR,s.PbI,s.PbS)
 	worldmap.infection(s.Psi,s.Pir,5) #On pourrait apres rentrer une maladie en parametre a la place de Psi et Pri et c'est la maladie meme qui definirait les probabilites Psi et Pri
-	worldmap.transport(s.PvoyageS,s.PvoyageI,s.PvoyageR) #Mouvement des populations par transport
+	worldmap.transportbis(s.PvoyageS,s.PvoyageI,s.PvoyageR) #Mouvement des populations par transport
 	
 	for j in worldmap.indice:
 		contenu=str(worldmap.name[j])+'\t'+str(worldmap.S[j])+'\t'+str(worldmap.I[j])+'\t'+str(worldmap.R[j])+'\t'+str(worldmap.R[j]+worldmap.I[j]+worldmap.S[j])+'\t'+str(i)+'\n';
