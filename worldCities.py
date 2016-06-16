@@ -3,6 +3,8 @@ import numpy as np
 import random
 import math
 import csv
+#from mpl_toolkits.basemap import Basemap
+import matplotlib.pyplot as plt
 #import simulation
 
 
@@ -49,6 +51,7 @@ class worldCities:
             self.area=[]
             self.latitude=[]
             self.longitude=[]
+            self.density_infected=[]
             for i in xrange(len(pop)):
                 self.name.append(pop[i][0])
                 self.indice.append(int(pop[i][1])-1)
@@ -56,6 +59,7 @@ class worldCities:
                 self.S.append(self.population[i])
                 self.I.append(0)
                 self.R.append(0)
+                self.density_infected.append(0)
                 self.density.append(pop[i][5])
                 self.area.append((self.S[i]+self.I[i]+self.R[i])/self.density[i]) #Peut etre inutile
                 self.latitude.append(pop[i][6])
@@ -116,9 +120,27 @@ class worldCities:
         #for i in self.indice:
         #    worldPopulation+=self.R[i]+self.I[i]+self.S[i]
         #print "After infection",worldPopulation
-    
-    
-    
+
+
+    #####################################################################################
+    ############### Classe d'affichage de la mapemonde ##################################
+    #####################################################################################    
+    #~ def map(self):
+	#~ 
+		#~ # Create a map on which to draw.  We're using a mercator projection, and showing the whole world.
+		#~ m = Basemap(projection='merc',llcrnrlat=-80,urcrnrlat=80,llcrnrlon=-180,urcrnrlon=180,lat_ts=20,resolution='c')
+		#~ # Draw coastlines, and the edges of the map.
+		#~ m.drawcoastlines()
+		#~ m.drawmapboundary()
+		#~ # Convert latitude and longitude to x and y coordinates
+		#~ x, y = m(list(self.longitude), list(self.latitude))
+		#~ # Use matplotlib to draw the points onto the map.
+		#~ m.scatter(x,y,10,marker='o',color='green')
+		#~ #m.drawcoastlines() différentes options cool si vous voulez les rajouter!
+		#~ #m.drawstates()
+		#~ #m.drawcountries()
+		#~ plt.show()
+    #~ 
     
     
     #####################################################################################
@@ -182,7 +204,7 @@ class worldCities:
                     self.I[j]-=(sauvegardeI[j]*PvoyageI*self.fly[i][j])//1
                     self.S[j]-=(sauvegardeS[j]*PvoyageS*self.fly[i][j])//1
 
-            print "Ville : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i]
+            print "Ville : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i],
 
     	##### S'assurer du nombre de personnes constant en absence de naissances #####
         #worldPop=0
@@ -239,8 +261,12 @@ class worldCities:
                     self.I[j] = (tIj_new * self.population[j])//1
                     self.R[i] = (tRi_new * self.population[i])//1
                     self.R[j] = (tRj_new * self.population[j])//1
+                    
+                    self.density_infected[i]=self.I[i]/self.population[i]  #Mis à jour de la densite d'infectes
+                    self.density_infected[j]=self.I[j]/self.population[j]
+                   
 
-            print "Ville : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i]
+            print "Ville : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i], "Densité d'infectés",self.density_infected[i]
 
 
 
@@ -253,6 +279,8 @@ class worldCities:
             self.R[i]-=(self.R[i]*PdR)//1
             self.I[i]-=(self.I[i]*PdI)//1
             self.S[i]-=(self.S[i]*PdS)//1
+            
+            self.density_infected[i]=self.I[i]/self.population[i] 
     
     
     #####################################################################################
@@ -266,6 +294,8 @@ class worldCities:
             self.R[i]+=(self.R[i]*PbR)//1 #Est-ce que les R font naitre forcement des R ?
             self.I[i]+=(self.I[i]*PbI)//1 #Est-ce que les I font naitre forcement des I ?
             self.S[i]+=(self.S[i]*PbS)//1
+            
+            self.density_infected[i]=self.I[i]/self.population[i] 
 
 
 
@@ -315,7 +345,10 @@ print "AVANT DEBUT DE CONTAMINATION"
 worldmap=worldCities('Population.csv','FlyFrequency.csv',s.nombreCriteres)
 
 fich=open("OutputPopulations.txt","w")
-fich.writelines("Name\t S \t I \t R \t Total \t Time \n\n")
+fich.writelines("Name\t S \t I \t R \t Total \t Time \n  \n")
+#worldmap.map()
+
+
 for i in xrange(20): #20 iterations dans lesquelles on a 5 iterations d'infection entre chaque processus de mouvement
 
 	print "ITERATION ",i
@@ -343,3 +376,4 @@ for i in xrange(20): #20 iterations dans lesquelles on a 5 iterations d'infectio
 			print "Rayon d'infection=%f"%self.rayon
 		self.export(self.fichier)
 """
+#Crée une densité d'infectés pour pouvoir représenter les villes où y'a trop d'infectés en rouge?
