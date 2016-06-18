@@ -55,9 +55,6 @@ class worldCities:
             self.density_infected=[]
 #            self.m = Basemap(projection='merc',llcrnrlat=-80,urcrnrlat=80,llcrnrlon=-180,urcrnrlon=180,lat_ts=20,resolution='c') ###Creation de la carte
             
-            		
-			
-            
             
             for i in xrange(len(pop)):
                 self.name.append(pop[i][0])
@@ -164,6 +161,13 @@ class worldCities:
 	       #print "Ville : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i]
 	
     """
+
+	##### S'assurer du nombre de personnes constant en absence de naissances #####
+        #worldPopulation=0
+        #for i in self.indice:
+        #    worldPopulation+=self.R[i]+self.I[i]+self.S[i]
+        #print "After infection",worldPopulation
+
 	
 	
     #####################################################################################
@@ -235,8 +239,6 @@ class worldCities:
 			
 		plt.show()
     """    
-    
-    
     
     
     #####################################################################################
@@ -510,6 +512,7 @@ closedAirportsIndex=[[4,2],[6,1],[13,3]]
 
 fold=open("Globaldata.txt","w")
 fold.writelines("Population mondiale\t S \t I \t R \t t \n")
+
 #worldmap.density_infected[0]=1.2
 #worldmap.maps(0.01)
 
@@ -534,11 +537,11 @@ for i in xrange(6): #20 iterations dans lesquelles on a 5 iterations d'infection
 	I_=0
 	R_=0
 	for j in worldmap.indice:
-		worldPopulation+=worldmap.R[j]+worldmap.I[j]+worldmap.S[j]
+		#worldPopulation+=worldmap.R[j]+worldmap.I[j]+worldmap.S[j]
 		S_+=worldmap.S[j]
 		R_+=worldmap.R[j]
 		I_+=worldmap.I[j]
-	content=str(worldPopulation)+'\t'+str(S_)+'\t'+str(I_)+'\t'+str(R_)+'\t'+str(i	)+'\n'+'\n';
+	content=str(worldPopulation)+'\t'+str(S_)+'\t'+str(I_)+'\t'+str(R_)+'\t'+str(i	)+'\n'+'\n'
 	fold.writelines(content)
 
 	for j in worldmap.indice:
@@ -547,7 +550,7 @@ for i in xrange(6): #20 iterations dans lesquelles on a 5 iterations d'infection
 	    fich.writelines(contenu)
 	fich.writelines('\n')
 	fich.close()
-    
+
 ################################################################################    
 
 
