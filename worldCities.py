@@ -3,7 +3,7 @@ import numpy as np
 import random
 import math
 import csv
-from mpl_toolkits.basemap import Basemap
+#from mpl_toolkits.basemap import Basemap
 import matplotlib.pyplot as plt
 #import simulation
 
@@ -41,8 +41,6 @@ class worldCities:
             
             #print pop
 
-
-
 	   #Creation de tableaux de noms, indices, populations... dont les lignes correspondent aux differentes villes
             self.name=[]
             self.indice=[]
@@ -55,7 +53,7 @@ class worldCities:
             self.latitude=[]
             self.longitude=[]
             self.density_infected=[]
-            self.m = Basemap(projection='merc',llcrnrlat=-80,urcrnrlat=80,llcrnrlon=-180,urcrnrlon=180,lat_ts=20,resolution='c') ###Creation de la carte
+#            self.m = Basemap(projection='merc',llcrnrlat=-80,urcrnrlat=80,llcrnrlon=-180,urcrnrlon=180,lat_ts=20,resolution='c') ###Creation de la carte
             
             		
 			
@@ -136,7 +134,7 @@ class worldCities:
     #####################################################################################
     ##### Classe d'infection des populations au sein d'une meme ville, sans echange #####
     #####################################################################################
-    def infection(self,alpha,tc,dt,iterations,StudiedCities):
+    def infection(self,alpha,tc,dt,iterations,StudiedCities,bigIter):
         
         gamma=1.0/tc
         
@@ -152,7 +150,8 @@ class worldCities:
                 #print self.I[i]
                 
                 if i in StudiedCities :
-                    self.profilSIR(i,fich,j)
+                    if j%1 == 0:
+                        self.profilSIR(i,fich,bigIter*iterations+j/1)
                 
             #print "Ville : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i]       
 
@@ -192,7 +191,7 @@ class worldCities:
 
 
 
-
+    """
     #####################################################################################
     ############### Classe d'affichage de la mapemonde ##################################
     #####################################################################################    
@@ -235,7 +234,7 @@ class worldCities:
 					m.drawgreatcircle(self.longitude[i],self.latitude[i],self.longitude[j],self.latitude[j],linewidth=2,color='b') 
 			
 		plt.show()
-    
+    """    
     
     
     
@@ -293,7 +292,7 @@ class worldCities:
                     self.I[j]-=(sauvegardeI[j]*PvoyageI*self.fly[i][j])
                     self.S[j]-=(sauvegardeS[j]*PvoyageS*self.fly[i][j])
 
-            print "Ville : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i]
+            #print "Ville : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i]
 
     	##### S'assurer du nombre de personnes constant en absence de naissances #####
         #worldPop=0
@@ -368,7 +367,7 @@ class worldCities:
 
             self.density_infected[c] = self.I[c] / float(self.population[c])
 
-            print "Ville : ",self.name[c]," S=",self.S[c]," I=",self.I[c]," R=",self.R[c], "Densite d'infectes",self.density_infected[c]
+            #print "Ville : ",self.name[c]," S=",self.S[c]," I=",self.I[c]," R=",self.R[c], "Densite d'infectes",self.density_infected[c]
 
 
 
@@ -486,10 +485,9 @@ s=simulation("SimulationParameters.txt")
 print "AVANT DEBUT DE CONTAMINATION"
 worldmap=worldCities('Population.csv','FlyFrequency.csv',s.nombreCriteres,s.PvoyageS,s.PvoyageI,s.PvoyageR)
 
-
 ########################### VILLES ETUDIEES ####################################
 
-StudiedCities=[0,1]    #Indices des villes à étudier
+StudiedCities=[0,1,2,3]    #Indices des villes à étudier
 
 for c in StudiedCities:
     fich=open(str("OutputProfilSIR_"+str(worldmap.name[c])+".txt"),"w")
@@ -510,16 +508,15 @@ closedAirportsIndex=[[4,2],[6,1],[13,3]]
 
 #########################   LANCEMENT DU PROGRAMME #############################
 
+fold=open("Globaldata.txt","w")
+fold.writelines("Population mondiale\t S \t I \t R \t t \n")
+#worldmap.density_infected[0]=1.2
+#worldmap.maps(0.01)
+
 fich=open("OutputPopulations.txt","w")
 fich.writelines("Name\t S \t I \t R \t Total \t Time \n  \n")
 
-fold=open("Globaldata.txt","w")
-fold.writelines("Population mondiale\t S \t I \t R \t t \n")
-worldmap.density_infected[0]=1.2
-worldmap.maps(0.01)
-
-
-for i in xrange(1): #20 iterations dans lesquelles on a 5 iterations d'infection entre chaque processus de mouvement
+for i in xrange(6): #20 iterations dans lesquelles on a 5 iterations d'infection entre chaque processus de mouvement
 
 	print "ITERATION ",i+1
 	
@@ -527,12 +524,11 @@ for i in xrange(1): #20 iterations dans lesquelles on a 5 iterations d'infection
 	#worldmap.death(s.PdR,s.PdI,s.PdS)
 	#worldmap.birth(s.PbR,s.PbI,s.PbS)
 
-	worldmap.infection(s.alpha,s.tc,s.dt,120,StudiedCities) #On pourrait apres rentrer une maladie en parametre a la place de Psi et Pri et c'est la maladie meme qui definirait les probabilites Psi et Pri
+	worldmap.infection(s.alpha,s.tc,s.dt,30,StudiedCities,i) #On pourrait apres rentrer une maladie en parametre a la place de Psi et Pri et c'est la maladie meme qui definirait les probabilites Psi et Pri
 	#worldmap.transportbis() #Mouvement des populations par transport
 
 	worldmap.transportbis(s.PvoyageS,s.PvoyageI,s.PvoyageR) #Mouvement des populations par transport
-	        
-
+	
 	worldPopulation=0
 	S_=0
 	I_=0
@@ -546,6 +542,7 @@ for i in xrange(1): #20 iterations dans lesquelles on a 5 iterations d'infection
 	fold.writelines(content)
 
 	for j in worldmap.indice:
+	    fich=open("OutputPopulations.txt","a")
 	    contenu=str(worldmap.name[j])+'\t'+str(worldmap.S[j])+'\t'+str(worldmap.I[j])+'\t'+str(worldmap.R[j])+'\t'+str(worldmap.R[j]+worldmap.I[j]+worldmap.S[j])+'\t'+str(i)+'\n';
 	    fich.writelines(contenu)
 	fich.writelines('\n')
@@ -555,3 +552,9 @@ for i in xrange(1): #20 iterations dans lesquelles on a 5 iterations d'infection
 
 
 #Crée une densité d'infectés pour pouvoir représenter les villes où y'a trop d'infectés en rouge?
+
+
+
+
+#Probleme augmentation au transport
+#Dépasse du graphique donc la population de la ville change

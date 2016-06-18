@@ -2,7 +2,7 @@
 ##### A PARTIR DU PROGRAMME GENERAL PAR VILLE #########################
 #######################################################################
 
-city = c('London','Paris')
+city = c('London','Paris','Rome','Berlin')
 
 
 for (i in 1:length(city)){
@@ -15,8 +15,9 @@ for (i in 1:length(city)){
   time=data[,5]
 
   x11()
-  par(mfrow=c(1,2))
+#  par(mfrow=c(1,2))
   plot(S~time,type='l',main=c('Profil SIR pour',city[i]))
-  plot(I~time,col='red')
+  
+  lines(I~time,col='red')
   lines(R~time,col='blue')
 }
