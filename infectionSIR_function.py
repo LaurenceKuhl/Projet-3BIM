@@ -12,6 +12,8 @@ class citySIR:
     
     def infection(self,alpha,gamma,dt,iterations):
         
+        print iterations
+        
         fich=open("OutputPopulations_CitySIR.txt","w")
         vect = [i for i in np.arange(0,iterations+dt,dt)]
 
@@ -24,6 +26,7 @@ class citySIR:
             self.S=self.S+dt*(-alpha*self.S*self.I)                 #alpha = taux d'infection
             self.I=self.I+dt*(alpha*self.S*self.I-gamma*self.I)           #gamma = taux de retrait
             self.R=self.R+dt*(gamma*self.I)
+            #print self.I
             
             contenu=str(self.S)+'\t'+str(self.I)+'\t'+str(self.R)+'\t'+str(self.R+self.I+self.S)+'\t'+str(j)+'\n';
             fich.writelines(contenu)
@@ -31,8 +34,8 @@ class citySIR:
 
         
 
-cityTest=citySIR(6*10**6,1000,0)
-alpha = 5.4*10**(-8)
+cityTest=citySIR(11967,10,0)
+alpha = 5.4*10**(-5)
 tc=7
 gamma = float(1.0/tc)
 print gamma
