@@ -110,7 +110,7 @@ class worldCities:
         ################################################################################
         #####                    Infection initiale des individus
         ################################################################################
-        self.I[0]=100000              #Infecte 10 personnes dans la ville 0
+        self.I[0]=10              #Infecte 10 personnes dans la ville 0
         self.S[0]=self.S[0]-10
 
         ##### S'assurer du nombre de personnes constant en l"absence de naissances #####
@@ -322,7 +322,7 @@ class worldCities:
             sauvegardeI.append(self.I[i])
             sauvegardeS.append(self.S[i])
 
-        for i in self.indice:
+        for i in range(5):
             for j in self.indice:
                 if j>i:
 
@@ -339,12 +339,12 @@ class worldCities:
                     tRj_old = float(sauvegardeR[j])/self.population[j]
 
                     #Voyage des S
-                    tSi_new =(tSi_old*self.population[i]+tSj_old*self.population[j]*PvoyageS*self.fly[i][j])/(self.population[i]+self.population[j]*PvoyageS*self.fly[i][j])
-                    tSj_new =(tSj_old*self.population[j]+tSi_old*self.population[i]*PvoyageS*self.fly[i][j])/(self.population[j]+self.population[i]*PvoyageS*self.fly[i][j])
+                    tSi_new =(tSi_old*self.population[i]+tSj_old*self.population[j]*PvoyageS*self.fly[i][j])/(self.population[i])
+                    tSj_new =(tSj_old*self.population[j]+tSi_old*self.population[i]*PvoyageS*self.fly[i][j])/(self.population[j])
 
                     #Voyage des I
-                    tIi_new =float(tIi_old*self.population[i]+tIj_old*self.population[j]*PvoyageI*self.fly[i][j])/(self.population[i]+self.population[j]*PvoyageI*self.fly[i][j])
-                    tIj_new =float(tIj_old*self.population[j]+tIi_old*self.population[i]*PvoyageI*self.fly[i][j])/(self.population[j]+self.population[i]*PvoyageI*self.fly[i][j])
+                    tIi_new =float(tIi_old*self.population[i]+tIj_old*self.population[j]*PvoyageI*self.fly[i][j])/(self.population[i])
+                    tIj_new =float(tIj_old*self.population[j]+tIi_old*self.population[i]*PvoyageI*self.fly[i][j])/(self.population[j])
 
                     """
                     print "ok"
@@ -359,8 +359,8 @@ class worldCities:
                     """
 
                     #Voyage des R
-                    tRi_new =(tRi_old*self.population[i]+tRj_old*self.population[j]*PvoyageR*self.fly[i][j])/(self.population[i]+self.population[j]*PvoyageR*self.fly[i][j])
-                    tRj_new =(tRj_old*self.population[j]+tRi_old*self.population[i]*PvoyageR*self.fly[i][j])/(self.population[j]+self.population[i]*PvoyageR*self.fly[i][j])
+                    tRi_new =(tRi_old*self.population[i]+tRj_old*self.population[j]*PvoyageR*self.fly[i][j])/(self.population[i])
+                    tRj_new =(tRj_old*self.population[j]+tRi_old*self.population[i]*PvoyageR*self.fly[i][j])/(self.population[j])
 
                     #Changement des populations S I et R des deux villes
 
@@ -370,16 +370,18 @@ class worldCities:
                     self.S[i] = float(tSi_new * self.population[i])
                     self.S[j] = float(tSj_new * self.population[j])
                     self.I[i] = float(tIi_new * self.population[i])
-                    #print self.name[i]
-                    #print self.I[i]
-#                    print "ok"+1
                     self.I[j] = float(tIj_new * self.population[j])
                     self.R[i] = float(tRi_new * self.population[i])
                     self.R[j] = float(tRj_new * self.population[j])
 
+                    print self.name[i] , "echange avec :", self.name[j]
+                    print sauvegardeI[i]
+                    print self.I[i]
+                    print sauvegardeI[j]
+                    print self.I[j]
                    
 
-            print "Ville : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i], "Densite d'infectes",self.density_infected[i]
+            #print "Ville : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i], "Densite d'infectes",self.density_infected[i]
 
 
 
@@ -473,7 +475,7 @@ for i in xrange(5): #20 iterations dans lesquelles on a 5 iterations d'infection
 	print "ITERATION ",i
 	#worldmap.death(s.PdR,s.PdI,s.PdS)
 	#worldmap.birth(s.PbR,s.PbI,s.PbS)
-	worldmap.infection(s.alpha,s.tc,s.dt,120) #On pourrait apres rentrer une maladie en parametre a la place de Psi et Pri et c'est la maladie meme qui definirait les probabilites Psi et Pri
+	worldmap.infection(s.alpha,s.tc,s.dt,1) #On pourrait apres rentrer une maladie en parametre a la place de Psi et Pri et c'est la maladie meme qui definirait les probabilites Psi et Pri
 	worldmap.transportbis(s.PvoyageS,s.PvoyageI,s.PvoyageR) #Mouvement des populations par transport
 
 	        
