@@ -106,6 +106,14 @@ class worldCities:
         ################################################################################
         self.I[0]=10              #Infecte 10 personnes dans la ville 0
         self.S[0]=self.S[0]-10
+        # self.I[1]=10              #Infecte 10 personnes dans la ville 0
+        # self.S[1]=self.S[1]-10
+        # self.I[2]=10              #Infecte 10 personnes dans la ville 0
+        # self.S[2]=self.S[2]-10
+        # self.I[3]=10              #Infecte 10 personnes dans la ville 0
+        # self.S[3]=self.S[3]-10
+        # self.I[4]=10              #Infecte 10 personnes dans la ville 0
+        # self.S[4]=self.S[4]-10
 
         ##### S'assurer du nombre de personnes constant en l"absence de naissances #####
         worldPopulation=0
@@ -126,17 +134,15 @@ class worldCities:
        
 
         gamma=1.0/tc
-        
         for k in xrange(iterations):
             
-            for i in xrange(len(self.population)):
-            
+            #for i in xrange(len(self.population)):
+            for i in xrange(5):
                 vect = [l for l in np.arange(0,10+dt,dt)]
                 for j in vect: #Nombre d'iterations d'infection
                     self.S[i]=self.S[i]+dt*(-alpha*self.S[i]*self.I[i])                 #alpha = taux d'infection
                     self.I[i]=self.I[i]+dt*(alpha*self.S[i]*self.I[i]-gamma*self.I[i])           #gamma = taux de retrait
                     self.R[i]=self.R[i]+dt*(gamma*self.I[i])
-                    
                     #contenu=str(self.S)+'\t'+str(self.I)+'\t'+str(self.R)+'\t'+str(self.R+self.I+self.S)+'\t'+str(j)+'\n';
                     #fich.writelines(contenu)
                     #fich.writelines('\n')
@@ -280,72 +286,56 @@ class worldCities:
         sauvegardeR=[]
         sauvegardeI=[]
         sauvegardeS=[]
+        tS_old =[]
+        tI_old = []
+        tR_old = []
 
         for i in self.indice:
             sauvegardeR.append(self.R[i])
             sauvegardeI.append(self.I[i])
             sauvegardeS.append(self.S[i])
+            tS_old.append(float(self.S[i])/self.population[i])
+            tI_old.append(float(self.I[i])/self.population[i])
+            tR_old.append(float(self.R[i])/self.population[i])
 
-        for i in range(5):
-            for j in self.indice:
+        cumulTauxS = np.zeros(len(self.population))
+        cumulTauxI = np.zeros(len(self.population))
+        cumulTauxR = np.zeros(len(self.population))
+
+        for i in self.indice:
+            for j in self.indice :
                 if j>i:
 
-                    #Calcul des proportions d'individus S,I et R dans les deux villes
-
-                    tSi_old = float(sauvegardeS[i])/self.population[i]
-                    tSj_old = float(sauvegardeS[j])/self.population[j]
-
-                    tIi_old = float(sauvegardeI[i])/self.population[i]
-                    tIj_old = float(sauvegardeI[j])/self.population[j]
-
-
-                    tRi_old = float(sauvegardeR[i])/self.population[i]
-                    tRj_old = float(sauvegardeR[j])/self.population[j]
-
                     #Voyage des S
-                    tSi_new =(tSi_old*self.population[i]+tSj_old*self.population[j]*PvoyageS*self.fly[i][j])/(self.population[i])
-                    tSj_new =(tSj_old*self.population[j]+tSi_old*self.population[i]*PvoyageS*self.fly[i][j])/(self.population[j])
+                    cumulTauxS[i] += tS_old[j]*self.population[j]*PvoyageS*self.fly[i][j]
+                    cumulTauxS[j] += tS_old[i]*self.population[i]*PvoyageS*self.fly[i][j]
+
+                    # tSi_new =(tSi_old*self.population[i]+tSj_old*self.population[j]*PvoyageS*self.fly[i][j])/(self.population[i])
+                    # tSj_new =(tSj_old*self.population[j]+tSi_old*self.population[i]*PvoyageS*self.fly[i][j])/(self.population[j])
 
                     #Voyage des I
-                    tIi_new =float(tIi_old*self.population[i]+tIj_old*self.population[j]*PvoyageI*self.fly[i][j])/(self.population[i])
-                    tIj_new =float(tIj_old*self.population[j]+tIi_old*self.population[i]*PvoyageI*self.fly[i][j])/(self.population[j])
+                    cumulTauxI[i] += tI_old[j]*self.population[j]*PvoyageI*self.fly[i][j]
+                    cumulTauxI[j] += tI_old[i]*self.population[i]*PvoyageI*self.fly[i][j]
 
-                    """
-                    print "ok"
-                    print tIj_old
-                    print tIi_old
-                    print self.population[j]
-                    print PvoyageI
-                    print self.fly[i][j]
-                    
-                    #print float(tIi_old*self.population[i]*PvoyageI*self.fly[i][j])
-                    #print "ok"+9
-                    """
+                    # tIi_new =float(tIi_old*self.population[i]+tIj_old*self.population[j]*PvoyageI*self.fly[i][j])/(self.population[i])
+                    # tIj_new =float(tIj_old*self.population[j]+tIi_old*self.population[i]*PvoyageI*self.fly[i][j])/(self.population[j])
 
                     #Voyage des R
-                    tRi_new =(tRi_old*self.population[i]+tRj_old*self.population[j]*PvoyageR*self.fly[i][j])/(self.population[i])
-                    tRj_new =(tRj_old*self.population[j]+tRi_old*self.population[i]*PvoyageR*self.fly[i][j])/(self.population[j])
+                    cumulTauxR[i] += tR_old[j]*self.population[j]*PvoyageR*self.fly[i][j]
+                    cumulTauxR[j] += tR_old[i]*self.population[i]*PvoyageR*self.fly[i][j]
 
-                    #Changement des populations S I et R des deux villes
+                    # tRi_new =(tRi_old*self.population[i]+tRj_old*self.population[j]*PvoyageR*self.fly[i][j])/(self.population[i])
+                    # tRj_new =(tRj_old*self.population[j]+tRi_old*self.population[i]*PvoyageR*self.fly[i][j])/(self.population[j])
 
-                    self.density_infected[i]=tIi_new  #Mis à jour de la densite d'infectes
-                    self.density_infected[j]=tIj_new
 
-                    self.S[i] = float(tSi_new * self.population[i])
-                    self.S[j] = float(tSj_new * self.population[j])
-                    self.I[i] = float(tIi_new * self.population[i])
-                    self.I[j] = float(tIj_new * self.population[j])
-                    self.R[i] = float(tRi_new * self.population[i])
-                    self.R[j] = float(tRj_new * self.population[j])
+        for c in self.indice :
+            self.S[c] = tS_old[c]*self.population[c] + cumulTauxS[c]
+            self.I[c] = tI_old[c]*self.population[c] + cumulTauxI[c]
+            self.R[c] = tR_old[c]*self.population[c] + cumulTauxR[c]
 
-                    print self.name[i] , "echange avec :", self.name[j]
-                    print sauvegardeI[i]
-                    print self.I[i]
-                    print sauvegardeI[j]
-                    print self.I[j]
-                   
+            self.density_infected[c] = self.I[c] / float(self.population[c])
 
-            #print "Ville : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i], "Densite d'infectes",self.density_infected[i]
+            print "Ville : ",self.name[c]," S=",self.S[c]," I=",self.I[c]," R=",self.R[c], "Densite d'infectes",self.density_infected[c]
 
 
 
@@ -429,13 +419,13 @@ fich.writelines("Name\t S \t I \t R \t Total \t Time \n  \n")
 #worldmap.map()
 
 
-for i in xrange(5): #20 iterations dans lesquelles on a 5 iterations d'infection entre chaque processus de mouvement
+for i in xrange(20): #20 iterations dans lesquelles on a 5 iterations d'infection entre chaque processus de mouvement
 
 
 	print "ITERATION ",i
 	#worldmap.death(s.PdR,s.PdI,s.PdS)
 	#worldmap.birth(s.PbR,s.PbI,s.PbS)
-	worldmap.infection(s.alpha,s.tc,s.dt,1) #On pourrait apres rentrer une maladie en parametre a la place de Psi et Pri et c'est la maladie meme qui definirait les probabilites Psi et Pri
+	worldmap.infection(s.alpha,s.tc,s.dt,10) #On pourrait apres rentrer une maladie en parametre a la place de Psi et Pri et c'est la maladie meme qui definirait les probabilites Psi et Pri
 	worldmap.transportbis(s.PvoyageS,s.PvoyageI,s.PvoyageR) #Mouvement des populations par transport
 	
 	for j in worldmap.indice:
