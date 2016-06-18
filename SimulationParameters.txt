@@ -12,4 +12,4 @@
 0.01	PbI		Probabilité de se reproduire en étant infecté
 0.02	PbR		Probabilité de se reproduire en étant retiré
 9	nombreCriteres	Nombre de colonnes dans le fichier Population.csv
-0.1 	h
+0.01 	h
