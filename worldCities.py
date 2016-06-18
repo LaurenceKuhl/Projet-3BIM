@@ -92,9 +92,10 @@ class worldCities:
         ################################################################################
         #Infection initiale des individus
         ################################################################################
-        self.I[0]=10              #Infecte 10 personnes dans la ville 0
-        self.S[0]=self.S[0]-10
-
+        self.I[0]=1000             #Infecte 10 personnes dans la ville 0
+        self.S[0]=self.S[0]-1000
+        self.I[44]=6000             #Infecte 10 personnes dans la ville 0
+        self.S[44]=self.S[0]-6000
         ##### S'assurer du nombre de personnes constant en l"absence de naissances #####
         worldPopulation=0
         for i in self.indice:
@@ -118,10 +119,10 @@ class worldCities:
         
         for i in xrange(len(self.population)):
           k=0
+          S=self.S[i]
+          I=self.I[i]
+          R=self.R[i]
           while k<10:
-            S=self.S[i]
-            I=self.I[i]
-            R=self.R[i]
             Succeptibles[i]=S+h*(-alpha*S*I)                 #alpha = taux d'infection
             Infecte[i]=I+h*(alpha*S*I-gamma*I)           #gamma = taux de retrait
             Retire[i]=R+h*(gamma*I)
@@ -234,7 +235,7 @@ class worldCities:
                     self.I[j]-=(sauvegardeI[j]*PvoyageI*self.fly[i][j])
                     self.S[j]-=(sauvegardeS[j]*PvoyageS*self.fly[i][j])
 
-            print "Ville : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i],
+            print "Ville : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i]
 
     	##### S'assurer du nombre de personnes constant en absence de naissances #####
         #worldPop=0
@@ -263,23 +264,24 @@ class worldCities:
                 if j>i:
 
                     #Calcul des proportions d'individus S,I et R dans les deux villes
-                    tSi_old = sauvegardeS[i]/self.population[i]
-                    tSj_old = sauvegardeS[j]/self.population[j]
+                    tSi_old = float(sauvegardeS[i])/self.population[i]
+                    tSj_old = float(sauvegardeS[j])/self.population[j]
 
-                    tIi_old = sauvegardeI[i]/self.population[i]
-                    tIj_old = sauvegardeI[j]/self.population[j]
+                    tIi_old = float(sauvegardeI[i])/self.population[i]
+                    tIj_old = float(sauvegardeI[j])/self.population[j]
 
-                    tRi_old = sauvegardeR[i]/self.population[i]
-                    tRj_old = sauvegardeR[j]/self.population[j]
+                    tRi_old = float(sauvegardeR[i])/self.population[i]
+                    tRj_old = float(sauvegardeR[j])/self.population[j]
 
                     #Voyage des S
                     tSi_new =(tSi_old*self.population[i]+tSj_old*self.population[j]*PvoyageS*self.fly[i][j])/(self.population[i]+self.population[j]*PvoyageS*self.fly[i][j])
                     tSj_new =(tSj_old*self.population[j]+tSi_old*self.population[i]*PvoyageS*self.fly[i][j])/(self.population[j]+self.population[i]*PvoyageS*self.fly[i][j])
 
                     #Voyage des I
-                    tIi_new =(tIi_old*self.population[i]+tIj_old*self.population[j]*PvoyageI*self.fly[i][j])/(self.population[i]+self.population[j]*PvoyageI*self.fly[i][j])
-                    tIj_new =(tIj_old*self.population[j]+tIi_old*self.population[i]*PvoyageI*self.fly[i][j])/(self.population[j]+self.population[i]*PvoyageI*self.fly[i][j])
-
+                    tIi_new =float(tIi_old*self.population[i]+tIj_old*self.population[j]*PvoyageI*self.fly[i][j])/(self.population[i]+self.population[j]*PvoyageI*self.fly[i][j])
+                    tIj_new =float(tIj_old*self.population[j]+tIi_old*self.population[i]*PvoyageI*self.fly[i][j])/(self.population[j]+self.population[i]*PvoyageI*self.fly[i][j])
+                    #print tIi_old
+                    #print float(tIj_old*self.population[j]+tIi_old*self.population[i]*PvoyageI*self.fly[i][j])/(self.population[j]+self.population[i]*PvoyageI*self.fly[i][j])
                     #Voyage des R
                     tRi_new =(tRi_old*self.population[i]+tRj_old*self.population[j]*PvoyageR*self.fly[i][j])/(self.population[i]+self.population[j]*PvoyageR*self.fly[i][j])
                     tRj_new =(tRj_old*self.population[j]+tRi_old*self.population[i]*PvoyageR*self.fly[i][j])/(self.population[j]+self.population[i]*PvoyageR*self.fly[i][j])
@@ -289,14 +291,15 @@ class worldCities:
                     self.S[j] = (tSj_new * self.population[j])
                     self.I[i] = (tIi_new * self.population[i])
                     self.I[j] = (tIj_new * self.population[j])
+                    print self.I[j]
                     self.R[i] = (tRi_new * self.population[i])
                     self.R[j] = (tRj_new * self.population[j])
                     
-                    self.density_infected[i]=self.I[i]/self.population[i]  #Mis à jour de la densite d'infectes
+                    self.density_infected[i]=self.I[i]/self.population[i]  #Mis a jour de la densite d'infectes
                     self.density_infected[j]=self.I[j]/self.population[j]
                    
 
-            print "Ville : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i], "Densité d'infectés",self.density_infected[i]
+            print "Ville : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i], "Densite d'infectes",self.density_infected[i]
 
 
 
@@ -379,7 +382,7 @@ fich=open("OutputPopulations.txt","w")
 fich.writelines("Name\t S \t I \t R \t Total \t Time \n  \n")
 #worldmap.map()
 
-for i in xrange(20): #20 iterations dans lesquelles on a 5 iterations d'infection entre chaque processus de mouvement
+for i in xrange(3): #20 iterations dans lesquelles on a 5 iterations d'infection entre chaque processus de mouvement
 
 	print "ITERATION ",i
 	#worldmap.death(s.PdR,s.PdI,s.PdS)
