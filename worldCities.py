@@ -52,6 +52,12 @@ class worldCities:
             self.latitude=[]
             self.longitude=[]
             self.density_infected=[]
+            self.m = Basemap(projection='merc',llcrnrlat=-80,urcrnrlat=80,llcrnrlon=-180,urcrnrlon=180,lat_ts=20,resolution='c') ###Creation de la carte
+            
+            		
+			
+            
+            
             for i in xrange(len(pop)):
                 self.name.append(pop[i][0])
                 self.indice.append(int(pop[i][1])-1)
@@ -155,23 +161,27 @@ class worldCities:
     #####################################################################################
     ############### Classe d'affichage de la mapemonde ##################################
     #####################################################################################    
-    def map(self):
-	
-		# Create a map on which to draw.  We're using a mercator projection, and showing the whole world.
-		m = Basemap(projection='merc',llcrnrlat=-80,urcrnrlat=80,llcrnrlon=-180,urcrnrlon=180,lat_ts=20,resolution='c')
+    def maps(self,DENSITY):
 		# Draw coastlines, and the edges of the map.
-		m.drawcoastlines()
-		m.drawmapboundary()
+		self.m.drawcoastlines()
+		self.m.drawmapboundary()
+		self.m.bluemarble()
 		# Convert latitude and longitude to x and y coordinates
-		x, y = m(list(self.longitude), list(self.latitude))
+		x, y = self.m(list(self.longitude), list(self.latitude))
 		# Use matplotlib to draw the points onto the map.
-		m.scatter(x,y,1,marker='O',color='green')
+		for i in self.indice:
+			if self.density_infected[i]>=DENSITY:
+				x,y=self.m(self.longitude[i],self.latitude[i])
+				self.m.plot(x,y,marker='o',color='red')
+			else:
+				x,y=self.m(self.longitude[i],self.latitude[i])
+				self.m.plot(x,y,marker='o',color='green')
 		#m.drawcoastlines() différentes options cool si vous voulez les rajouter!
 		#m.drawstates()
 		#m.drawcountries()
 		plt.show()
     
-    def drawflights(self,INDICE):
+    def drawflights(self,densite_vol):
 		# Create a map on which to draw.  We're using a mercator projection, and showing the whole world.
 		m = Basemap(projection='merc',llcrnrlat=-80,urcrnrlat=80,llcrnrlon=-180,urcrnrlon=180,lat_ts=20,resolution='c')
 		# Draw coastlines, and the edges of the map.
@@ -186,7 +196,7 @@ class worldCities:
 		m.drawcountries()
 		for i in self.indice:
 			for j in self.indice:
-				if self.fly[i][j] > INDICE:
+				if self.fly[i][j] > densite_vol:
 					m.drawgreatcircle(self.longitude[i],self.latitude[i],self.longitude[j],self.latitude[j],linewidth=2,color='b') 
 			
 		plt.show()
@@ -395,7 +405,11 @@ worldmap=worldCities('Population.csv','FlyFrequency.csv',s.nombreCriteres)
 
 fich=open("OutputPopulations.txt","w")
 fich.writelines("Name\t S \t I \t R \t Total \t Time \n  \n")
-#worldmap.map()
+
+fold=open("Globaldata.txt","w")
+fold.writelines("Population mondiale\t S \t I \t R \t t \n")
+worldmap.density_infected[0]=1.2
+worldmap.maps(0.01)
 
 for i in xrange(20): #20 iterations dans lesquelles on a 5 iterations d'infection entre chaque processus de mouvement
 
@@ -404,6 +418,24 @@ for i in xrange(20): #20 iterations dans lesquelles on a 5 iterations d'infectio
 	#worldmap.birth(s.PbR,s.PbI,s.PbS)
 	worldmap.infection(s.alpha,s.gamma,s.h,5) #On pourrait apres rentrer une maladie en parametre a la place de Psi et Pri et c'est la maladie meme qui definirait les probabilites Psi et Pri
 	worldmap.transportbis(s.PvoyageS,s.PvoyageI,s.PvoyageR) #Mouvement des populations par transport
+
+	        
+	worldPopulation=0
+	S_=0
+	I_=0
+	R_=0
+	for j in worldmap.indice:
+		worldPopulation+=worldmap.R[j]+worldmap.I[j]+worldmap.S[j]
+		S_+=worldmap.S[j]
+		R_+=worldmap.R[j]
+		I_+=worldmap.I[j]
+	content=str(worldPopulation)+'\t'+str(S_)+'\t'+str(I_)+'\t'+str(R_)+'\t'+str(i	)+'\n'+'\n';
+	fold.writelines(content)
+
+        #print "Before move",worldPopulation
+        
+     
+	
 	
 	for j in worldmap.indice:
 		contenu=str(worldmap.name[j])+'\t'+str(worldmap.S[j])+'\t'+str(worldmap.I[j])+'\t'+str(worldmap.R[j])+'\t'+str(worldmap.R[j]+worldmap.I[j]+worldmap.S[j])+'\t'+str(i)+'\n';
