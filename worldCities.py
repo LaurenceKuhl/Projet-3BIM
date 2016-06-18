@@ -15,7 +15,7 @@ class worldCities:
     #####################################################################################
     ################# Definition of all the cities and their parameters #################
     ##################################################################################### 
-    def __init__(self,fieldPop,fieldFly,nbrCriteres):
+    def __init__(self,fieldPop,fieldFly,nbrCriteres,PvoyageS,PvoyageI,PvoyageR):
         
         
         
@@ -69,9 +69,12 @@ class worldCities:
                 self.area.append((self.S[i]+self.I[i]+self.R[i])/self.density[i]) #Peut etre inutile
                 self.latitude.append(pop[i][6])
                 self.longitude.append(pop[i][7])
-                print "Ville a t0 : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i]
+                #print "Ville a t0 : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i]
                 self.nbrCities=len(self.name)
-            #print self.R
+            
+            self.pVoyS = [PvoyageS]*self.nbrCities
+            self.pVoyI = [PvoyageI]*self.nbrCities
+            self.pVoyR = [PvoyageR]*self.nbrCities
 	
 	
 	
@@ -102,9 +105,9 @@ class worldCities:
 
 
         ################################################################################
-        #####                    Infection initiale des individus
+        ###########                Infection initiale des individus           ##########
         ################################################################################
-        self.I[0]=100000              #Infecte 10 personnes dans la ville 0
+        self.I[0]=10              #Infecte 10 personnes dans la ville 0
         self.S[0]=self.S[0]-10
 
         ##### S'assurer du nombre de personnes constant en l"absence de naissances #####
@@ -121,25 +124,25 @@ class worldCities:
     #####################################################################################
     ##### Classe d'infection des populations au sein d'une meme ville, sans echange #####
     #####################################################################################
-    def infection(self,alpha,tc,dt,iterations):
-        #fich=open("OutputPopulations_CitySIR.txt","w")
+    def infection(self,alpha,tc,dt,iterations,StudiedCities):
         
         gamma=1.0/tc
         
-        for k in xrange(iterations):
+        for i in xrange(len(self.population)):
             
-            for i in xrange(len(self.population)):
-            
-                vect = [l for l in np.arange(0,10+dt,dt)]
-                for j in vect: #Nombre d'iterations d'infection
-                    self.S[i]=self.S[i]+dt*(-alpha*self.S[i]*self.I[i])                 #alpha = taux d'infection
-                    self.I[i]=self.I[i]+dt*(alpha*self.S[i]*self.I[i]-gamma*self.I[i])           #gamma = taux de retrait
-                    self.R[i]=self.R[i]+dt*(gamma*self.I[i])
-                    
-                    #contenu=str(self.S)+'\t'+str(self.I)+'\t'+str(self.R)+'\t'+str(self.R+self.I+self.S)+'\t'+str(j)+'\n';
-                    #fich.writelines(contenu)
-                    #fich.writelines('\n')
-       
+            vect = [l for l in np.arange(0,iterations+dt,dt)]
+            for j in vect: #Nombre d'iterations d'infection
+                
+                
+                self.S[i]=self.S[i]+dt*(-alpha*self.S[i]*self.I[i])                         #alpha = taux d'infection
+                self.I[i]=self.I[i]+dt*(alpha*self.S[i]*self.I[i]-gamma*self.I[i])          #gamma = taux de retrait
+                self.R[i]=self.R[i]+dt*(gamma*self.I[i])
+                #print self.I[i]
+                
+                if i in StudiedCities :
+                    self.profilSIR(i,fich,j)
+                
+            #print "Ville : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i]
        
     """
     ANCIEN MODELE SIR
@@ -164,6 +167,17 @@ class worldCities:
     #print "After infection",worldPopulation
 
 
+
+    #####################################################################################
+    ########### Afficher le profil SIR d'une ville ######################################
+    #####################################################################################    
+
+
+    def profilSIR(self,indiceVille,fich,iternumber):
+        fich=open(str("OutputProfilSIR_"+str(self.name[indiceVille])+".txt"),"a")
+        contenu=str(self.S[indiceVille])+'\t'+str(self.I[indiceVille])+'\t'+str(self.R[indiceVille])+'\t'+str(self.R[indiceVille]+self.I[indiceVille]+self.S[indiceVille])+'\t'+str(iternumber)+'\n';
+        fich.writelines(contenu)
+        fich.writelines('\n')
 
 
 
@@ -207,16 +221,8 @@ class worldCities:
             sauvegardeR.append(self.R[i])
             sauvegardeI.append(self.I[i])
             sauvegardeS.append(self.S[i])
-        #print "En 5=",sauvegardeS[5]
         
-        ##### Population mouvements #####
-        
-        #worldPopulation=0
-        #for i in self.indice:
-        #    worldPopulation+=self.R[i]+self.I[i]+self.S[i]
-        #print "Before move",worldPopulation
-        
-        
+        ##### Population mouvements #####        
         """
         Chaque etat S, I et R a sa propre probabilite de voyage pour l'instant.
         Ainsi, dans chaque ville, on envoie une proportion PvoyageR de la population
@@ -274,7 +280,8 @@ class worldCities:
     #Dans un premier temps j'ai gardé les tableaux S I et R comme au début
     #Ensuite on stockera directement les proportions à l'intérieur
     def transportbis(self,PvoyageS,PvoyageI,PvoyageR):
-         ##### Safeguard before first move #####
+        
+        ##### Safeguard before first move #####
         sauvegardeR=[]
         sauvegardeI=[]
         sauvegardeS=[]
@@ -284,13 +291,15 @@ class worldCities:
             sauvegardeI.append(self.I[i])
             sauvegardeS.append(self.S[i])
 
-        for i in self.indice:
+        for i in self.indice[0:5]:
             for j in self.indice:
                 if j>i:
 
                     #Calcul des proportions d'individus S,I et R dans les deux villes
                     tSi_old = float(sauvegardeS[i]/self.population[i])
                     tSj_old = float(sauvegardeS[j]/self.population[j])
+                    #print "tSi_old"
+                    #print tSi_old
 
                     tIi_old = float(sauvegardeI[i]/self.population[i])
                     tIj_old = float(sauvegardeI[j]/self.population[j])
@@ -317,7 +326,8 @@ class worldCities:
                     #print "ok"+9
                     """
                     tIi_new =float((tIi_old*self.population[i]+tIj_old*self.population[j]*PvoyageI*self.fly[i][j])/(self.population[i]+self.population[j]*PvoyageI*self.fly[i][j]))
-                    #print tIi_new
+                    print "tSi_new"
+                    print tIi_new
                     tIj_new =float((tIj_old*self.population[j]+tIi_old*self.population[i]*PvoyageI*self.fly[i][j])/(self.population[j]+self.population[i]*PvoyageI*self.fly[i][j]))
 
                     #Voyage des R
@@ -359,9 +369,7 @@ class worldCities:
     
     #####################################################################################
     #################### Classe de naissances dans chaque ville #########################
-    #####################################################################################
-    
-            
+    #####################################################################################           
     def birth(self,PbR,PbI,PbS):
 
         for i in self.indice:        
@@ -369,11 +377,41 @@ class worldCities:
             self.I[i]+=(self.I[i]*PbI) #Est-ce que les I font naitre forcement des I ?
             self.S[i]+=(self.S[i]*PbS)
             
-            self.density_infected[i]=self.I[i]/self.population[i] 
+            self.density_infected[i]=self.I[i]/self.population[i]
+    
+    
+    
+    #####################################################################################
+    ######## Classe de fermeture des aéroports selon une liste d'indices reçue ##########
+    #####################################################################################
+    def closeAirports(self,closedAirportsIndex):
+        
+        for i in range(len(closedAirportsIndex)):
+                        
+            # Changer la probabilite de voyager selon le niveau d'urgence
+            if closedAirportsIndex[i][1]==1:
+                if self.pVoyI[closedAirportsIndex[i][0]]>0.5:
+                    self.pVoyI[closedAirportsIndex[i][0]] = 0.1
+                else :
+                    self.pVoyI[closedAirportsIndex[i][0]] = self.pVoyI[closedAirportsIndex[i][0]] - 0.5
+            
+            elif closedAirportsIndex[i][1]==2:
+                self.pVoyI[closedAirportsIndex[i][0]]=0
+                
+            elif closedAirportsIndex[i][1]==3:
+                self.pVoyS[closedAirportsIndex[i][0]]=0
+                self.pVoyI[closedAirportsIndex[i][0]]=0
+                self.pVoyR[closedAirportsIndex[i][0]]=0
 
 
 
-######################################################################################
+
+
+
+################################################################################
+#####################    CLASSE SIMULATION    ##################################
+################################################################################
+
 """
 J'aurais bien aime que la suite soit sur le fichier simulation.py, faire plusieurs 
 classes pour lancer le programme mais je n'ai pas reussi a faire le lien entre les
@@ -414,29 +452,68 @@ Pir = Proba qu'un infecte devienne resistant
 """
 
 
+
+
+
+
+
+
+################################################################################
+################        LANCEMENT DU PROGRAMME          ########################
+################################################################################
+
+
 print '##### PROJET 3BIM - INSA Lyon - Bosc, Greugny, Jaouen, Kuhlburger #####'
 s=simulation("SimulationParameters.txt")
 print "AVANT DEBUT DE CONTAMINATION"
-worldmap=worldCities('Population.csv','FlyFrequency.csv',s.nombreCriteres)
+worldmap=worldCities('Population.csv','FlyFrequency.csv',s.nombreCriteres,s.PvoyageS,s.PvoyageI,s.PvoyageR)
+
+
+########################### VILLES ETUDIEES ####################################
+
+StudiedCities=[0,1]    #Indices des villes à étudier
+
+for c in StudiedCities:
+    fich=open(str("OutputProfilSIR_"+str(worldmap.name[c])+".txt"),"w")
+    fich.writelines("S\tI\tR\tTotal\tTime\n\n")
+    fich.close()
+
+
+##########################  AEROPORTS FERMES ###################################
+
+#ClosedAirportsIndex est une liste de tuples. Ces tuples sont composes de l'indice
+#de l'aeroport a fermer et le niveau d'urgence avec lequel le fermer :
+# 1 - Empecher la moitie des infectes de voyager
+# 2 - Empecher 9/10e des infectes de voyager
+# 3 - Empecher tous les individus S, I et R de voyager
+closedAirportsIndex=[[4,2],[6,1],[13,3]]
+
+
+
+#########################   LANCEMENT DU PROGRAMME #############################
 
 fich=open("OutputPopulations.txt","w")
 fich.writelines("Name\t S \t I \t R \t Total \t Time \n  \n")
 #worldmap.map()
 
-for i in xrange(5): #20 iterations dans lesquelles on a 5 iterations d'infection entre chaque processus de mouvement
 
-	print "ITERATION ",i
+for i in xrange(1): #20 iterations dans lesquelles on a 5 iterations d'infection entre chaque processus de mouvement
+
+	print "ITERATION ",i+1
+	worldmap.closeAirports(closedAirportsIndex)
 	#worldmap.death(s.PdR,s.PdI,s.PdS)
 	#worldmap.birth(s.PbR,s.PbI,s.PbS)
-	worldmap.infection(s.alpha,s.tc,s.dt,120) #On pourrait apres rentrer une maladie en parametre a la place de Psi et Pri et c'est la maladie meme qui definirait les probabilites Psi et Pri
-	worldmap.transportbis(s.PvoyageS,s.PvoyageI,s.PvoyageR) #Mouvement des populations par transport
+	worldmap.infection(s.alpha,s.tc,s.dt,120,StudiedCities) #On pourrait apres rentrer une maladie en parametre a la place de Psi et Pri et c'est la maladie meme qui definirait les probabilites Psi et Pri
+	#worldmap.transportbis() #Mouvement des populations par transport
 	
+
 	for j in worldmap.indice:
-		contenu=str(worldmap.name[j])+'\t'+str(worldmap.S[j])+'\t'+str(worldmap.I[j])+'\t'+str(worldmap.R[j])+'\t'+str(worldmap.R[j]+worldmap.I[j]+worldmap.S[j])+'\t'+str(i)+'\n';
-		fich.writelines(contenu)
+	    contenu=str(worldmap.name[j])+'\t'+str(worldmap.S[j])+'\t'+str(worldmap.I[j])+'\t'+str(worldmap.R[j])+'\t'+str(worldmap.R[j]+worldmap.I[j]+worldmap.S[j])+'\t'+str(i)+'\n';
+	    fich.writelines(contenu)
 	fich.writelines('\n')
+	fich.close()
     
-######################################################################################    
+################################################################################    
 
 
 #Crée une densité d'infectés pour pouvoir représenter les villes où y'a trop d'infectés en rouge?
