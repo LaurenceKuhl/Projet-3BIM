@@ -58,8 +58,11 @@ class worldCities:
             self.longitude=[]
             self.density_infected=[]
             self.m = Basemap(projection='merc',llcrnrlat=-80,urcrnrlat=80,llcrnrlon=-180,urcrnrlon=180,lat_ts=20,resolution='c') ###Creation de la carte
+            self.m.drawcoastlines()
+            self.m.drawmapboundary()
+            self.m.bluemarble()
             
-            		
+
 			
             
             
@@ -164,7 +167,7 @@ class worldCities:
         #for i in self.indice:
         #    worldPopulation+=self.R[i]+self.I[i]+self.S[i]
         #print "After infection",worldPopulation
-=======
+
 
 	
 	
@@ -181,17 +184,30 @@ class worldCities:
 
 
 
->>>>>>> origin/master
-
 
     #####################################################################################
     ############### Classe d'affichage de la mapemonde ##################################
     #####################################################################################    
-    def maps(self,DENSITY):
-		# Draw coastlines, and the edges of the map.
-		self.m.drawcoastlines()
-		self.m.drawmapboundary()
-		self.m.bluemarble()
+    def maps(self,alpha,tc):
+		gamma=1.0/tc
+		# Convert latitude and longitude to x and y coordinates
+		x, y = self.m(list(self.longitude), list(self.latitude))
+		# Use matplotlib to draw the points onto the map.
+		for i in self.indice:
+			if float((alpha/gamma)*self.S[i])>1:
+				x,y=self.m(self.longitude[i],self.latitude[i])
+				self.m.plot(x,y,marker=(0,3,0),color='red')
+			elif(self.R[i]>self.S[i]):
+				x,y=self.m(self.longitude[i],self.latitude[i])
+				self.m.plot(x,y,marker='8',color='yellow')
+			else:
+				x,y=self.m(self.longitude[i],self.latitude[i])
+				self.m.plot(x,y,marker='D',color='green')
+
+		plt.show()
+    
+    def drawflights(self,densite_vol,DENSITY):
+		# Create a map on which to draw.  We're using a mercator projection, and showing the whole world.
 		# Convert latitude and longitude to x and y coordinates
 		x, y = self.m(list(self.longitude), list(self.latitude))
 		# Use matplotlib to draw the points onto the map.
@@ -202,32 +218,15 @@ class worldCities:
 			else:
 				x,y=self.m(self.longitude[i],self.latitude[i])
 				self.m.plot(x,y,marker='o',color='green')
-		#m.drawcoastlines() différentes options cool si vous voulez les rajouter!
-		#m.drawstates()
-		#m.drawcountries()
-		plt.show()
-    
-    def drawflights(self,densite_vol):
-		# Create a map on which to draw.  We're using a mercator projection, and showing the whole world.
-		m = Basemap(projection='merc',llcrnrlat=-80,urcrnrlat=80,llcrnrlon=-180,urcrnrlon=180,lat_ts=20,resolution='c')
-		# Draw coastlines, and the edges of the map.
-		m.drawcoastlines()
-		m.drawmapboundary()
-		# Convert latitude and longitude to x and y coordinates
-		x, y = m(list(self.longitude), list(self.latitude))
-		# Use matplotlib to draw the points onto the map.
-		m.scatter(x,y,10,marker='o',color='green')
-		m.drawcoastlines() #différentes options cool si vous voulez les rajouter!
-		m.drawstates()
-		m.drawcountries()
 		for i in self.indice:
 			for j in self.indice:
 				if self.fly[i][j] > densite_vol:
-					m.drawgreatcircle(self.longitude[i],self.latitude[i],self.longitude[j],self.latitude[j],linewidth=2,color='b') 
+					if abs(float(self.longitude[i]) - float(self.longitude[j])) < 90:
+						self.m.drawgreatcircle(float(self.longitude[i]), float(self.latitude[i]), float(self.longitude[j]), float(self.latitude[j]),linewidth=1,color='y')
+					else:
+						self.m.drawgreatcircle(self.longitude[i],self.latitude[i],self.longitude[j],self.latitude[j],linewidth=2,color='y') 
 			
 		plt.show()
-    
-    
     
     
     
@@ -374,11 +373,11 @@ class worldCities:
                     self.R[i] = float(tRi_new * self.population[i])
                     self.R[j] = float(tRj_new * self.population[j])
 
-                    print self.name[i] , "echange avec :", self.name[j]
-                    print sauvegardeI[i]
-                    print self.I[i]
-                    print sauvegardeI[j]
-                    print self.I[j]
+                    #print self.name[i] , "echange avec :", self.name[j]
+                    #print sauvegardeI[i]
+                    #print self.I[i]
+                    #print sauvegardeI[j]
+                    #print self.I[j]
                    
 
             #print "Ville : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i], "Densite d'infectes",self.density_infected[i]
@@ -465,12 +464,10 @@ fich.writelines("Name\t S \t I \t R \t Total \t Time \n  \n")
 
 fold=open("Globaldata.txt","w")
 fold.writelines("Population mondiale\t S \t I \t R \t t \n")
-worldmap.density_infected[0]=1.2
-worldmap.maps(0.01)
+#worldmap.density_infected[0]=1.2
 
 
-for i in xrange(5): #20 iterations dans lesquelles on a 5 iterations d'infection entre chaque processus de mouvement
-
+for i in xrange(200): #20 iterations dans lesquelles on a 5 iterations d'infection entre chaque processus de mouvement
 
 	print "ITERATION ",i
 	#worldmap.death(s.PdR,s.PdI,s.PdS)
@@ -500,7 +497,9 @@ for i in xrange(5): #20 iterations dans lesquelles on a 5 iterations d'infection
 		contenu=str(worldmap.name[j])+'\t'+str(worldmap.S[j])+'\t'+str(worldmap.I[j])+'\t'+str(worldmap.R[j])+'\t'+str(worldmap.R[j]+worldmap.I[j]+worldmap.S[j])+'\t'+str(i)+'\n';
 		fich.writelines(contenu)
 	fich.writelines('\n')
-    
+	
+worldmap.maps(s.alpha,s.tc)
+
 ######################################################################################    
 
 
