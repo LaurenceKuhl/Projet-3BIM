@@ -530,7 +530,7 @@ fold.writelines("Population mondiale\t S \t I \t R \t t \n")
 fich=open("OutputPopulations.txt","w")
 fich.writelines("Name\t S \t I \t R \t Total \t Time \n  \n")
 
-for i in xrange(10): #20 iterations dans lesquelles on a 5 iterations d'infection entre chaque processus de mouvement
+for i in xrange(50): #20 iterations dans lesquelles on a 5 iterations d'infection entre chaque processus de mouvement
 
 
 	print "ITERATION ",i+1
@@ -539,7 +539,7 @@ for i in xrange(10): #20 iterations dans lesquelles on a 5 iterations d'infectio
 	#worldmap.death(s.PdR,s.PdI,s.PdS)
 	#worldmap.birth(s.PbR,s.PbI,s.PbS)
 
-	worldmap.infection(s.alpha,s.tc,s.dt,30,StudiedCities,i) #On pourrait apres rentrer une maladie en parametre a la place de Psi et Pri et c'est la maladie meme qui definirait les probabilites Psi et Pri
+	worldmap.infection(s.alpha,s.tc,s.dt,2,StudiedCities,i) #On pourrait apres rentrer une maladie en parametre a la place de Psi et Pri et c'est la maladie meme qui definirait les probabilites Psi et Pri
 
 	#worldmap.transportbis() #Mouvement des populations par transport
 
