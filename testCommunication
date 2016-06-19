@@ -1,0 +1,3 @@
+
+print("Qui es-tu ?\n") ; prenom = input()
+print "Bonjour " , prenom

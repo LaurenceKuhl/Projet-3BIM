@@ -1,6 +1,6 @@
 ﻿Simulation parameters
 
-0.000054	alpha
+0.00005	alpha
 7	tc
 0.1	PvoyageS	Probabilité de prendre un avion dans la journée pour chaque habitant S
 0.1	PvoyageI	Probabilité de prendre un avion dans la journée pour chaque habitant I
@@ -12,4 +12,4 @@
 0.01	PbI		Probabilité de se reproduire en étant infecté
 0.02	PbR		Probabilité de se reproduire en étant retiré
 9	nombreCriteres	Nombre de colonnes dans le fichier Population.csv
-0.01	dt
+0.01 	h
