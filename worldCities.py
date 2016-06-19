@@ -313,27 +313,27 @@ class worldCities:
     #Dans un premier temps j'ai gardé les tableaux S I et R comme au début
     #Ensuite on stockera directement les proportions à l'intérieur
     def transportbis(self):
-        
+   
         ##### Safeguard before first move #####
         sauvegardeR=[]
         sauvegardeI=[]
-        sauvegardeS=[]
-        tS_old =[]
+        #sauvegardeS=[]
+        #tS_old =[]
         tI_old = []
         tR_old = []
 
         for i in self.indice:
             sauvegardeR.append(self.R[i])
             sauvegardeI.append(self.I[i])
-            sauvegardeS.append(self.S[i])
-            tS_old.append(float(self.S[i])/self.population[i])
+            #sauvegardeS.append(self.S[i])
+            #tS_old.append(float(self.S[i])/self.population[i])
             tI_old.append(float(self.I[i])/self.population[i])
             tR_old.append(float(self.R[i])/self.population[i])
 
-        cumulTauxS = np.zeros(len(self.population))
+        #cumulTauxS = np.zeros(len(self.population))
         cumulTauxI = np.zeros(len(self.population))
         cumulTauxR = np.zeros(len(self.population))
-        cumulpopS = np.zeros(len(self.population))
+        #cumulpopS = np.zeros(len(self.population))
         cumulpopI = np.zeros(len(self.population))
         cumulpopR = np.zeros(len(self.population))
         
@@ -344,36 +344,38 @@ class worldCities:
                     if ((self.pVoyS[i][1]==1) and (self.pVoyI[i][1]==1) and (self.pVoyR[i][1]==1)):
                         
                         #Voyage des S
-                        cumulTauxS[i] += tS_old[j]*self.population[j]*self.pVoyS[j][0]*self.fly[i][j]
-                        cumulpopS[i] += self.population[j]*self.pVoyS[j][0]*self.fly[i][j]
-                        
+                        #cumulTauxS[i] += tS_old[j]*self.population[j]*self.pVoyS[j][0]*self.fly[i][j]
+                        #cumulpopS[i] += self.population[j]*self.pVoyS[j][0]*self.fly[i][j]
                         #Voyage des I                    
                         cumulTauxI[i] += tI_old[j]*self.population[j]*self.pVoyI[j][0]*self.fly[i][j]
                         cumulpopI[i] += self.population[j]*self.pVoyI[j][0]*self.fly[i][j]
-                        
                         #Voyage des R
                         cumulTauxR[i] += tR_old[j]*self.population[j]*self.pVoyR[j][0]*self.fly[i][j]
                         cumulpopR[i] += self.population[j]*self.pVoyR[j][0]*self.fly[i][j]
                     
                     if ((self.pVoyS[j][1]==1) and (self.pVoyI[j][1]==1) and (self.pVoyR[j][1]==1)):
 
-                        cumulTauxS[j] += tS_old[i]*self.population[i]*self.pVoyS[i][0]*self.fly[i][j]
-                        cumulpopS[j] += self.population[i]*self.pVoyS[i][0]*self.fly[i][j]
-                        
+                        #cumulTauxS[j] += tS_old[i]*self.population[i]*self.pVoyS[i][0]*self.fly[i][j]
+                        #cumulpopS[j] += self.population[i]*self.pVoyS[i][0]*self.fly[i][j]
+                        # tSi_new =(tSi_old*self.population[i]+tSj_old*self.population[j]*PvoyageS*self.fly[i][j])/(self.population[i])
+                        # tSj_new =(tSj_old*self.population[j]+tSi_old*self.population[i]*PvoyageS*self.fly[i][j])/(self.population[j])
                         #Voyage des I
                         cumulTauxI[j] += tI_old[i]*self.population[i]*self.pVoyI[i][0]*self.fly[i][j]
                         cumulpopI[j] += self.population[i]*self.pVoyI[i][0]*self.fly[i][j]
-                        
+                        # tIi_new =float(tIi_old*self.population[i]+tIj_old*self.population[j]*PvoyageI*self.fly[i][j])/(self.population[i])
+                        # tIj_new =float(tIj_old*self.population[j]+tIi_old*self.population[i]*PvoyageI*self.fly[i][j])/(self.population[j])
                         #Voyage des R
                         cumulTauxR[j] += tR_old[i]*self.population[i]*self.pVoyR[i][0]*self.fly[i][j]
                         cumulpopR[j] += self.population[i]*self.pVoyR[i][0]*self.fly[i][j]
-                        
-
+                        # tRi_new =(tRi_old*self.population[i]+tRj_old*self.population[j]*PvoyageR*self.fly[i][j])/(self.population[i])
+                        # tRj_new =(tRj_old*self.population[j]+tRi_old*self.population[i]*PvoyageR*self.fly[i][j])/(self.population[j])
 
         for c in self.indice :
-            self.S[c] = (tS_old[c]*self.population[c] + cumulTauxS[c])/(self.population[c]+cumulpopS[c])* self.population[c]
             self.I[c] = (tI_old[c]*self.population[c] + cumulTauxI[c])/(self.population[c]+cumulpopI[c])* self.population[c]
             self.R[c] = (tR_old[c]*self.population[c] + cumulTauxR[c])/(self.population[c]+cumulpopR[c])* self.population[c]
+
+            #on deduit le nouveau nombre de S a partir du nouveau nb de I et de R
+            self.S[c] = self.population[c] - (self.I[c] + self.R[c])
 
             self.density_infected[c] = self.I[c] / float(self.population[c])
 
@@ -538,8 +540,8 @@ for i in xrange(s.Tsim): #20 iterations dans lesquelles on a 5 iterations d'infe
 
 
 	print "ITERATION ",i+1
-	
-	#worldmap.closeAirports(closedAirportsIndex)
+
+	worldmap.closeAirports(closedAirportsIndex)
 	#worldmap.death(s.PdR,s.PdI,s.PdS)
 	#worldmap.birth(s.PbR,s.PbI,s.PbS)
 
@@ -552,12 +554,13 @@ for i in xrange(s.Tsim): #20 iterations dans lesquelles on a 5 iterations d'infe
 	I_=0
 	R_=0
 	for j in worldmap.indice:
-		#worldPopulation+=worldmap.R[j]+worldmap.I[j]+worldmap.S[j]
+		worldPopulation+=worldmap.R[j]+worldmap.I[j]+worldmap.S[j]
 		S_+=worldmap.S[j]
 		R_+=worldmap.R[j]
 		I_+=worldmap.I[j]
 	content=str(worldPopulation)+'\t'+str(S_)+'\t'+str(I_)+'\t'+str(R_)+'\t'+str(i	)+'\n'+'\n'
 	fold.writelines(content)
+	#print worldPopulation
 
 	for j in worldmap.indice:
 	    fich=open("OutputPopulations.txt","a")
