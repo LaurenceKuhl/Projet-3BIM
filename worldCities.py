@@ -340,6 +340,9 @@ class worldCities:
         cumulTauxS = np.zeros(len(self.population))
         cumulTauxI = np.zeros(len(self.population))
         cumulTauxR = np.zeros(len(self.population))
+        cumulpopS = np.zeros(len(self.population))
+        cumulpopI = np.zeros(len(self.population))
+        cumulpopR = np.zeros(len(self.population))
 
 
         for i in self.indice:
@@ -349,6 +352,8 @@ class worldCities:
                     #Voyage des S
                     cumulTauxS[i] += tS_old[j]*self.population[j]*PvoyageS*self.fly[i][j]
                     cumulTauxS[j] += tS_old[i]*self.population[i]*PvoyageS*self.fly[i][j]
+                    cumulpopS[i] += self.population[j]*PvoyageS*self.fly[i][j]
+                    cumulpopS[j] += self.population[i]*PvoyageS*self.fly[i][j]
 
                     # tSi_new =(tSi_old*self.population[i]+tSj_old*self.population[j]*PvoyageS*self.fly[i][j])/(self.population[i])
                     # tSj_new =(tSj_old*self.population[j]+tSi_old*self.population[i]*PvoyageS*self.fly[i][j])/(self.population[j])
@@ -356,6 +361,8 @@ class worldCities:
                     #Voyage des I
                     cumulTauxI[i] += tI_old[j]*self.population[j]*PvoyageI*self.fly[i][j]
                     cumulTauxI[j] += tI_old[i]*self.population[i]*PvoyageI*self.fly[i][j]
+                    cumulpopI[i] += self.population[j]*PvoyageI*self.fly[i][j]
+                    cumulpopI[j] += self.population[i]*PvoyageI*self.fly[i][j]
 
                     # tIi_new =float(tIi_old*self.population[i]+tIj_old*self.population[j]*PvoyageI*self.fly[i][j])/(self.population[i])
                     # tIj_new =float(tIj_old*self.population[j]+tIi_old*self.population[i]*PvoyageI*self.fly[i][j])/(self.population[j])
@@ -363,15 +370,16 @@ class worldCities:
                     #Voyage des R
                     cumulTauxR[i] += tR_old[j]*self.population[j]*PvoyageR*self.fly[i][j]
                     cumulTauxR[j] += tR_old[i]*self.population[i]*PvoyageR*self.fly[i][j]
-
+                    cumulpopR[i] += self.population[j]*PvoyageR*self.fly[i][j]
+                    cumulpopR[j] += self.population[i]*PvoyageR*self.fly[i][j]
                     # tRi_new =(tRi_old*self.population[i]+tRj_old*self.population[j]*PvoyageR*self.fly[i][j])/(self.population[i])
                     # tRj_new =(tRj_old*self.population[j]+tRi_old*self.population[i]*PvoyageR*self.fly[i][j])/(self.population[j])
 
 
         for c in self.indice :
-            self.S[c] = tS_old[c]*self.population[c] + cumulTauxS[c]
-            self.I[c] = tI_old[c]*self.population[c] + cumulTauxI[c]
-            self.R[c] = tR_old[c]*self.population[c] + cumulTauxR[c]
+            self.S[c] = (tS_old[c]*self.population[c] + cumulTauxS[c])/(self.population[c]+cumulpopS[c])* self.population[c]
+            self.I[c] = (tI_old[c]*self.population[c] + cumulTauxI[c])/(self.population[c]+cumulpopI[c])* self.population[c]
+            self.R[c] = (tR_old[c]*self.population[c] + cumulTauxR[c])/(self.population[c]+cumulpopR[c])* self.population[c]
 
             self.density_infected[c] = self.I[c] / float(self.population[c])
 
@@ -526,7 +534,7 @@ worldmap.density_infected[0]=1.2
 #worldmap.maps(0.01)
 
 
-for i in xrange(1): #20 iterations dans lesquelles on a 5 iterations d'infection entre chaque processus de mouvement
+for i in xrange(10): #20 iterations dans lesquelles on a 5 iterations d'infection entre chaque processus de mouvement
 
 	print "ITERATION ",i+1
 	
@@ -534,7 +542,7 @@ for i in xrange(1): #20 iterations dans lesquelles on a 5 iterations d'infection
 	#worldmap.death(s.PdR,s.PdI,s.PdS)
 	#worldmap.birth(s.PbR,s.PbI,s.PbS)
 
-	worldmap.infection(s.alpha,s.tc,s.dt,120,StudiedCities) #On pourrait apres rentrer une maladie en parametre a la place de Psi et Pri et c'est la maladie meme qui definirait les probabilites Psi et Pri
+	worldmap.infection(s.alpha,s.tc,s.dt,30,StudiedCities) #On pourrait apres rentrer une maladie en parametre a la place de Psi et Pri et c'est la maladie meme qui definirait les probabilites Psi et Pri
 	#worldmap.transportbis() #Mouvement des populations par transport
 
 	worldmap.transportbis(s.PvoyageS,s.PvoyageI,s.PvoyageR) #Mouvement des populations par transport
