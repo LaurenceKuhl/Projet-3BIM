@@ -16,8 +16,7 @@ for (i in 1:length(city)){
 
   x11()
 #  par(mfrow=c(1,2))
-  M = max(max(S),max(I),max(R))
-  plot(S~time,type='l',main=c('Profil SIR pour',city[i]),ylim=c(0,M))
+  plot(S~time,type='l',main=c('Profil SIR pour',city[i]))
   
   lines(I~time,col='red')
   lines(R~time,col='blue')
