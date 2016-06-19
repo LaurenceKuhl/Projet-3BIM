@@ -318,23 +318,23 @@ class worldCities:
         ##### Safeguard before first move #####
         sauvegardeR=[]
         sauvegardeI=[]
-        sauvegardeS=[]
-        tS_old =[]
+        #sauvegardeS=[]
+        #tS_old =[]
         tI_old = []
         tR_old = []
 
         for i in self.indice:
             sauvegardeR.append(self.R[i])
             sauvegardeI.append(self.I[i])
-            sauvegardeS.append(self.S[i])
-            tS_old.append(float(self.S[i])/self.population[i])
+            #sauvegardeS.append(self.S[i])
+            #tS_old.append(float(self.S[i])/self.population[i])
             tI_old.append(float(self.I[i])/self.population[i])
             tR_old.append(float(self.R[i])/self.population[i])
 
-        cumulTauxS = np.zeros(len(self.population))
+        #cumulTauxS = np.zeros(len(self.population))
         cumulTauxI = np.zeros(len(self.population))
         cumulTauxR = np.zeros(len(self.population))
-        cumulpopS = np.zeros(len(self.population))
+        #cumulpopS = np.zeros(len(self.population))
         cumulpopI = np.zeros(len(self.population))
         cumulpopR = np.zeros(len(self.population))
 
@@ -344,10 +344,10 @@ class worldCities:
                 if j>i:
 
                     #Voyage des S
-                    cumulTauxS[i] += tS_old[j]*self.population[j]*PvoyageS*self.fly[i][j]
-                    cumulTauxS[j] += tS_old[i]*self.population[i]*PvoyageS*self.fly[i][j]
-                    cumulpopS[i] += self.population[j]*PvoyageS*self.fly[i][j]
-                    cumulpopS[j] += self.population[i]*PvoyageS*self.fly[i][j]
+                    # cumulTauxS[i] += tS_old[j]*self.population[j]*PvoyageS*self.fly[i][j]
+                    # cumulTauxS[j] += tS_old[i]*self.population[i]*PvoyageS*self.fly[i][j]
+                    # cumulpopS[i] += self.population[j]*PvoyageS*self.fly[i][j]
+                    # cumulpopS[j] += self.population[i]*PvoyageS*self.fly[i][j]
 
                     # tSi_new =(tSi_old*self.population[i]+tSj_old*self.population[j]*PvoyageS*self.fly[i][j])/(self.population[i])
                     # tSj_new =(tSj_old*self.population[j]+tSi_old*self.population[i]*PvoyageS*self.fly[i][j])/(self.population[j])
@@ -371,9 +371,12 @@ class worldCities:
 
 
         for c in self.indice :
-            self.S[c] = (tS_old[c]*self.population[c] + cumulTauxS[c])/(self.population[c]+cumulpopS[c])* self.population[c]
+            #self.S[c] = (tS_old[c]*self.population[c] + cumulTauxS[c])/(self.population[c]+cumulpopS[c])* self.population[c]
             self.I[c] = (tI_old[c]*self.population[c] + cumulTauxI[c])/(self.population[c]+cumulpopI[c])* self.population[c]
             self.R[c] = (tR_old[c]*self.population[c] + cumulTauxR[c])/(self.population[c]+cumulpopR[c])* self.population[c]
+
+            #on deduit le nouveau nombre de S a partir du nouveau nb de I et de R
+            self.S[c] = self.population[c] - (self.I[c] + self.R[c])
 
             self.density_infected[c] = self.I[c] / float(self.population[c])
 
