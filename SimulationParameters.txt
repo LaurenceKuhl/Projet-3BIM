@@ -2,16 +2,16 @@
 
 0.000054	alpha
 7	tc
-0.1	PvoyageS	Probabilité de prendre un avion dans la journée pour chaque habitant S
-0.1	PvoyageI	Probabilité de prendre un avion dans la journée pour chaque habitant I
-0.1	PvoyageR	Probabilité de prendre un avion dans la journée pour chaque habitant R
+1	PvoyageS	Probabilité de prendre un avion dans la journée pour chaque habitant S
+1	PvoyageI	Probabilité de prendre un avion dans la journée pour chaque habitant I
+1	PvoyageR	Probabilité de prendre un avion dans la journée pour chaque habitant R
 0.01	PdS		Probabilité de mourir en étant sain
 0.1	PdI		Probabilité de mourir en étant infecté
 0.01	PdR		Probabilité de mourir en étant retiré
 0.02	PbS		Probabilité de se reproduire en étant sain
 0.01	PbI		Probabilité de se reproduire en étant infecté
 0.02	PbR		Probabilité de se reproduire en étant retiré
-9	nombreCriteres	Nombre de colonnes dans le fichier Population.csv
+11	nombreCriteres	Nombre de colonnes dans le fichier Population.csv
 0.01	dt
-16	Tsim	Temps de simulation
-4	Tinf	Nombre d'infections par voyage
+5	Tsim	Temps de simulation
+20	Tinf	Nombre d'infections par voyage
