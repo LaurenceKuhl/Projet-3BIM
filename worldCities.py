@@ -104,8 +104,8 @@ class worldCities:
         ################################################################################
         ###########                Infection initiale des individus           ##########
         ################################################################################
-        self.I[0]=10              #Infecte 10 personnes dans la ville 0
-        self.S[0]=self.S[0]-10
+        self.I[0]=0.01              #Infecte 10 personnes dans la ville 0
+        self.S[0]=self.S[0]-0.01
         # self.I[1]=10              #Infecte 10 personnes dans la ville 0
         # self.S[1]=self.S[1]-10
         # self.I[2]=10              #Infecte 10 personnes dans la ville 0
@@ -132,17 +132,21 @@ class worldCities:
     def infection(self,alpha,tc,dt,iterations,StudiedCities,bigIter):
         
         gamma=1.0/tc
+
+        f = open("test.txt",'w')
         
         for i in xrange(len(self.population)):
-            
+            f.writelines(str(i)+"\n")
             vect = [l for l in np.arange(0,iterations+dt,dt)]
             for j in vect: #Nombre d'iterations d'infection
-                
-                
+
                 self.S[i]=self.S[i]+dt*(-alpha*self.S[i]*self.I[i])                         #alpha = taux d'infection
                 self.I[i]=self.I[i]+dt*(alpha*self.S[i]*self.I[i]-gamma*self.I[i])          #gamma = taux de retrait
                 self.R[i]=self.R[i]+dt*(gamma*self.I[i])
-                
+
+
+
+
                 if i in StudiedCities :
                     if j%1 == 0:
                         self.profilSIR(i,fich,bigIter*iterations+j/1)
@@ -506,7 +510,7 @@ worldmap=worldCities('Population.csv','FlyFrequency.csv',s.nombreCriteres,s.Pvoy
 
 ########################### VILLES ETUDIEES ####################################
 
-StudiedCities=[0,1,2,3]    #Indices des villes à étudier
+StudiedCities=[0,1,2,3,51,26]    #Indices des villes à étudier
 
 for c in StudiedCities:
     fich=open(str("OutputProfilSIR_"+str(worldmap.name[c])+".txt"),"w")
@@ -536,12 +540,13 @@ fold.writelines("Population mondiale\t S \t I \t R \t t \n")
 fich=open("OutputPopulations.txt","w")
 fich.writelines("Name\t S \t I \t R \t Total \t Time \n  \n")
 
+worldmap.closeAirports(closedAirportsIndex)
 for i in xrange(s.Tsim): #20 iterations dans lesquelles on a 5 iterations d'infection entre chaque processus de mouvement
 
 
 	print "ITERATION ",i+1
 
-	worldmap.closeAirports(closedAirportsIndex)
+
 	#worldmap.death(s.PdR,s.PdI,s.PdS)
 	#worldmap.birth(s.PbR,s.PbI,s.PbS)
 
