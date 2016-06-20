@@ -107,6 +107,7 @@ class worldCities:
                 
         self.I[ind]=10              #Infecte 10 personnes dans la ville 0
         self.S[ind]=self.S[0]-10
+
         # self.I[1]=10              #Infecte 10 personnes dans la ville 0
         # self.S[1]=self.S[1]-10
         # self.I[2]=10              #Infecte 10 personnes dans la ville 0
@@ -133,17 +134,21 @@ class worldCities:
     def infection(self,alpha,tc,dt,iterations,StudiedCities,bigIter):
                 
         gamma=1.0/tc
+
+        f = open("test.txt",'w')
         
         for i in xrange(len(self.population)):
-            
+            f.writelines(str(i)+"\n")
             vect = [l for l in np.arange(0,iterations+dt,dt)]
             for j in vect: #Nombre d'iterations d'infection
-                
-                
+
                 self.S[i]=self.S[i]+dt*(-alpha*self.S[i]*self.I[i])                        #alpha = taux d'infection
                 self.I[i]=self.I[i]+dt*(alpha*self.S[i]*self.I[i]-gamma*self.I[i])          #gamma = taux de retrait
                 self.R[i]=self.R[i]+dt*(gamma*self.I[i])
-                
+
+
+
+
                 if i in StudiedCities :
                     if j%1 == 0:
                         self.profilSIR(i,fich,bigIter*iterations+j/1)

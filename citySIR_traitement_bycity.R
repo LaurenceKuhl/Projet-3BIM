@@ -4,7 +4,6 @@
 
 city = c('London','Paris','Singapore','Budapest','Berlin')
 
-
 for (i in 1:length(city)){
   city[i]
   data=read.table(paste("OutputProfilSIR_",city[i],".txt",sep=""),header=T,dec=".",sep="\t")
