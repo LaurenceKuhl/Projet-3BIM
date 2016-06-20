@@ -56,10 +56,10 @@ class worldCities:
             self.latitude=[]
             self.longitude=[]
             self.density_infected=[]
-            self.m = Basemap(projection='merc',llcrnrlat=-80,urcrnrlat=80,llcrnrlon=-180,urcrnrlon=180,lat_ts=20,resolution='c') ###Creation de la carte
-            self.m.drawcoastlines()
-            self.m.drawmapboundary()
-            self.m.bluemarble()
+            # self.m = Basemap(projection='merc',llcrnrlat=-80,urcrnrlat=80,llcrnrlon=-180,urcrnrlon=180,lat_ts=20,resolution='c') ###Creation de la carte
+            # self.m.drawcoastlines()
+            # self.m.drawmapboundary()
+            # self.m.bluemarble()
             self.pVoyS = []
             self.pVoyI = []
             self.pVoyR = []
@@ -598,7 +598,7 @@ fold.writelines("Population mondiale\t S \t I \t R \t t \n")
 
 
 #worldmap.density_infected[0]=1.2
-worldmap.maps(s.alpha,s.tc)
+#worldmap.maps(s.alpha,s.tc)
 
 fich=open("OutputPopulations.txt","w")
 fich.writelines("Name\t S \t I \t R \t Total \t Time \n  \n")
@@ -642,7 +642,7 @@ for i in xrange(s.Tsim): #20 iterations dans lesquelles on a 5 iterations d'infe
 	    fich.writelines(contenu)
 	fich.writelines('\n')
 	fich.close()
-worldmap.maps(s.alpha,s.tc)
+#worldmap.maps(s.alpha,s.tc)
 ################################################################################    
 
 ################################################################################
