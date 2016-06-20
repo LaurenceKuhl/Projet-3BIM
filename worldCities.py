@@ -105,8 +105,9 @@ class worldCities:
         ################################################################################
         ind=self.convNameIndice('London')
                 
-        self.I[ind]=10              #Infecte 10 personnes dans la ville 0
-        self.S[ind]=self.S[0]-10
+        self.I[ind]=0.001              #Infecte 10 personnes dans la ville 0
+        self.S[ind]=self.S[ind]-0.001
+        self.density_infected[ind] = float(self.I[ind]) / self.population[ind]
 
         # self.I[1]=10              #Infecte 10 personnes dans la ville 0
         # self.S[1]=self.S[1]-10
@@ -147,11 +148,11 @@ class worldCities:
                 self.R[i]=self.R[i]+dt*(gamma*self.I[i])
 
 
-
-
                 if i in StudiedCities :
                     if j%1 == 0:
                         self.profilSIR(i,fich,bigIter*iterations+j/1)
+
+            self.density_infected[i] = float(self.I[i]) /self.population[i]
                 
             #print "Ville : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i]
         
@@ -374,8 +375,8 @@ class worldCities:
                         #cumulTauxR[j] += tR_old[i]*self.population[i]*self.pVoyR[i][0]*self.fly[i][j]
                         #cumulpopR[j] += self.population[i]*self.pVoyR[i][0]*self.fly[i][j]
         
-        print cumulTauxR
-        print cumulTauxI                
+        # print cumulTauxR
+        # print cumulTauxI
                                                         
         for c in self.indice :
             self.I[c] = (tI_old[c]*self.population[c] + cumulTauxI[c])/(self.population[c]+cumulpopI[c])* self.population[c]
