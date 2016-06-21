@@ -2,7 +2,8 @@
 ##### A PARTIR DU PROGRAMME GENERAL PAR VILLE #########################
 #######################################################################
 
-city = c('London','Paris','Singapore','Budapest','Berlin')
+city = c('London','Paris','Singapore','Budapest','Berlin','Hong-Kong')
+#city = c('Singapore')
 
 for (i in 1:length(city)){
   city[i]
@@ -15,8 +16,8 @@ for (i in 1:length(city)){
 
   x11()
 #  par(mfrow=c(1,2))
-  plot(S~time,type='l',main=c('Profil SIR pour',city[i]),xlab='Time',ylab='Population',lwd=1,ylim=c(0,max(max(S),max(I),max(R))))
+  plot(S~time,type='l',main=paste('Profil SIR de',city[i]),xlab='Time (jours)',ylab=expression(paste('Population (',10^3,' personnes)')),lwd=1,ylim=c(0,max(max(S),max(I),max(R))))
   lines(I~time,col='red',lwd=1)
   lines(R~time,col='blue',lwd=1)
-  legend('topright',legend=c('Sain','Infectés','Résistants'),col=c("black", "red","blue"),lwd=2)
+  legend('topright',legend=c('Sain','Infectés','Résistants'),col=c("black", "red","blue"),lwd=2,bg='white')
 }
