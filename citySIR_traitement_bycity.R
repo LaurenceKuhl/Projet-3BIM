@@ -2,7 +2,7 @@
 ##### A PARTIR DU PROGRAMME GENERAL PAR VILLE #########################
 #######################################################################
 
-city = c('London','Paris','Singapore','Budapest','Berlin')
+city = c('London','Paris','Singapore','Budapest','Berlin','Perth')
 
 for (i in 1:length(city)){
   city[i]

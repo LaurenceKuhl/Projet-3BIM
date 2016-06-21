@@ -151,10 +151,10 @@ class worldCities:
                 
         gamma=1.0/tc
 
-        f = open("test.txt",'w')
+        #f = open("test.txt",'w')
         
         for i in xrange(len(self.population)):
-            f.writelines(str(i)+"\n")
+            #f.writelines(str(i)+"\n")
             vect = [l for l in np.arange(0,iterations+dt,dt)]
             for j in vect: #Nombre d'iterations d'infection
 
@@ -569,7 +569,7 @@ worldmap=worldCities('Population.csv','FlyFrequency.csv',s.nombreCriteres,s.Pvoy
 
 ########################### VILLES ETUDIEES ####################################
 
-StudiedCities=['London','Paris','Singapore','Budapest','Berlin']    #Indices des villes à étudier
+StudiedCities=['London','Paris','Singapore','Budapest','Berlin','Perth']    #Indices des villes à étudier
 for c in range(len(StudiedCities)):
     fich=open(str("OutputProfilSIR_"+str(StudiedCities[c])+".txt"),"w")
     fich.writelines("S\tI\tR\tTotal\tTime\n\n")
