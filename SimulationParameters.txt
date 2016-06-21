@@ -13,5 +13,5 @@
 0.02	PbR		Probabilité de se reproduire en étant retiré
 11	nombreCriteres	Nombre de colonnes dans le fichier Population.csv
 0.01	dt
-120	Tsim	Temps de simulation
+200	Tsim	Temps de simulation
 1	Tinf	Nombre d'infections par voyage
