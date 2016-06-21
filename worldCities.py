@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 class worldCities:
     
     
+    
     #####################################################################################
     ################# Definition of all the cities and their parameters #################
     ##################################################################################### 
@@ -23,7 +24,8 @@ class worldCities:
             pop = list()
             for row in contents:
                 pop.append(row)        
-                  
+            
+            #print pop                    
             
             for i in xrange(0,3): #Supprimer les 4 premieres et 3 dernieres lignes
                 pop.pop(0)
@@ -37,6 +39,10 @@ class worldCities:
                 pop[i].append(pop[i][0].split(";")[nbrCriteres-1])
                 pop[i][0]=pop[i][0].split(";")[0]
                 #Faut il fermer le fichier
+            
+            #print pop
+
+
 
 	   #Creation de tableaux de noms, indices, populations... dont les lignes correspondent aux differentes villes
             self.name=[]
@@ -50,11 +56,18 @@ class worldCities:
             self.latitude=[]
             self.longitude=[]
             self.density_infected=[]
-#            self.m = Basemap(projection='merc',llcrnrlat=-80,urcrnrlat=80,llcrnrlon=-180,urcrnrlon=180,lat_ts=20,resolution='c') ###Creation de la carte
+            # self.m = Basemap(projection='merc',llcrnrlat=-80,urcrnrlat=80,llcrnrlon=-180,urcrnrlon=180,lat_ts=20,resolution='c') ###Creation de la carte
+            # self.m.drawcoastlines()
+            # self.m.drawmapboundary()
+            # self.m.bluemarble()
             self.pVoyS = []
             self.pVoyI = []
             self.pVoyR = []
              
+
+			
+            
+            
             for i in xrange(len(pop)):
                 self.name.append(pop[i][0])
                 self.indice.append(int(pop[i][1])-1)
@@ -78,6 +91,7 @@ class worldCities:
                 """
                 #print "Ville a t0 : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i]
                 self.nbrCities=len(self.name)
+   
 	
 	
 	
@@ -106,6 +120,7 @@ class worldCities:
 
 
 
+
         ################################################################################
         ###########                Infection initiale des individus           ##########
         ################################################################################
@@ -113,7 +128,8 @@ class worldCities:
                 
         self.I[ind]=0.001              #Infecte 10 personnes dans la ville 0
         self.S[ind]=self.S[ind]-0.001
-        print self.population[ind]
+        self.density_infected[ind] = float(self.I[ind]) / self.population[ind]
+#        print self.population[ind]
 
         # self.I[1]=10              #Infecte 10 personnes dans la ville 0
         # self.S[1]=self.S[1]-10
@@ -154,11 +170,11 @@ class worldCities:
                 self.R[i]=self.R[i]+dt*(gamma*self.I[i])
 
 
-
-
                 if i in StudiedCities :
                     if j%1 == 0:
                         self.profilSIR(i,fich,bigIter*iterations+j/1)
+
+            self.density_infected[i] = float(self.I[i]) /self.population[i]
                 
             #print "Ville : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i]
         
@@ -168,6 +184,8 @@ class worldCities:
         #    worldPopulation+=self.R[i]+self.I[i]+self.S[i]
         #print "After infection",worldPopulation
 
+       
+       
     """
     ANCIEN MODELE SIR
 	       self.R[i]=self.R[i]+(Pir*self.I[i])//1                         #Avec la probabilite Pir de passer du stade I a R
@@ -199,13 +217,12 @@ class worldCities:
     #####################################################################################    
 
 
+
     def profilSIR(self,indiceVille,fich,iternumber):
         fich=open(str("OutputProfilSIR_"+str(self.name[indiceVille])+".txt"),"a")
         contenu=str(self.S[indiceVille])+'\t'+str(self.I[indiceVille])+'\t'+str(self.R[indiceVille])+'\t'+str(self.R[indiceVille]+self.I[indiceVille]+self.S[indiceVille])+'\t'+str(iternumber)+'\n';
         fich.writelines(contenu)
         fich.writelines('\n')
-        
-
 
     
     #####################################################################################
@@ -218,18 +235,34 @@ class worldCities:
         fich.writelines('\n')
 
 
-
-
-
     """
     #####################################################################################
     ############### Classe d'affichage de la mapemonde ##################################
     #####################################################################################    
-    def maps(self,DENSITY):
+    def maps(self,alpha,tc):
+		gamma=1.0/tc
+		# Convert latitude and longitude to x and y coordinates
+		x, y = self.m(list(self.longitude), list(self.latitude))
+		# Use matplotlib to draw the points onto the map.
+		for i in self.indice:
+			if float((alpha/gamma)*self.S[i])>1:
+				x,y=self.m(self.longitude[i],self.latitude[i])
+				self.m.plot(x,y,marker=(0,3,0),color='red')
+			elif(self.R[i]>self.S[i]):
+				x,y=self.m(self.longitude[i],self.latitude[i])
+				self.m.plot(x,y,marker='8',color='yellow')
+			else:
+				x,y=self.m(self.longitude[i],self.latitude[i])
+				self.m.plot(x,y,marker='D',color='green')
+
+		plt.show()
+    
+    def drawflights(self,densite_vol,DENSITY):
+		# Create a map on which to draw.  We're using a mercator projection, and showing the whole world.
+		m = Basemap(projection='merc',llcrnrlat=-80,urcrnrlat=80,llcrnrlon=-180,urcrnrlon=180,lat_ts=20,resolution='c')
 		# Draw coastlines, and the edges of the map.
-		self.m.drawcoastlines()
-		self.m.drawmapboundary()
-		self.m.bluemarble()
+		m.drawcoastlines()
+		m.drawmapboundary()
 		# Convert latitude and longitude to x and y coordinates
 		x, y = self.m(list(self.longitude), list(self.latitude))
 		# Use matplotlib to draw the points onto the map.
@@ -240,28 +273,13 @@ class worldCities:
 			else:
 				x,y=self.m(self.longitude[i],self.latitude[i])
 				self.m.plot(x,y,marker='o',color='green')
-		#m.drawcoastlines() différentes options cool si vous voulez les rajouter!
-		#m.drawstates()
-		#m.drawcountries()
-		plt.show()
-    
-    def drawflights(self,densite_vol):
-		# Create a map on which to draw.  We're using a mercator projection, and showing the whole world.
-		m = Basemap(projection='merc',llcrnrlat=-80,urcrnrlat=80,llcrnrlon=-180,urcrnrlon=180,lat_ts=20,resolution='c')
-		# Draw coastlines, and the edges of the map.
-		m.drawcoastlines()
-		m.drawmapboundary()
-		# Convert latitude and longitude to x and y coordinates
-		x, y = m(list(self.longitude), list(self.latitude))
-		# Use matplotlib to draw the points onto the map.
-		m.scatter(x,y,10,marker='o',color='green')
-		m.drawcoastlines() #différentes options cool si vous voulez les rajouter!
-		m.drawstates()
-		m.drawcountries()
 		for i in self.indice:
 			for j in self.indice:
 				if self.fly[i][j] > densite_vol:
-					m.drawgreatcircle(self.longitude[i],self.latitude[i],self.longitude[j],self.latitude[j],linewidth=2,color='b') 
+					if abs(float(self.longitude[i]) - float(self.longitude[j])) < 90:
+						self.m.drawgreatcircle(float(self.longitude[i]), float(self.latitude[i]), float(self.longitude[j]), float(self.latitude[j]),linewidth=1,color='y')
+					else:
+						self.m.drawgreatcircle(self.longitude[i],self.latitude[i],self.longitude[j],self.latitude[j],linewidth=2,color='y') 
 			
 		plt.show()
     """    
@@ -316,9 +334,20 @@ class worldCities:
                     #self.S[j]+=(sauvegardeS[i]*PvoyageS*self.fly[i][j])
                     
                     #Départ de la ville j
-                    #self.R[j]-=(sauvegardeR[j]*PvoyageR*self.fly[i][j])
-                    #self.I[j]-=(sauvegardeI[j]*PvoyageI*self.fly[i][j])
-                    #self.S[j]-=(sauvegardeS[j]*PvoyageS*self.fly[i][j])
+       
+        """"
+        Chaque etat S, I et R a sa propre probabilite de voyage pour l'instant.
+        Ainsi, dans chaque ville, on envoie une proportion PvoyageR de la population
+        R vers une autre ville. De meme pour chaque etat.
+        La sauvegarde sert a calculer la part de la population qui voyage entre l'instant
+        t et t+1. Pour cela, nous devons stocker les 2 instants pour que les populations
+        ne bougent pas entre les calculs.
+        Self.fly[i][j] regroupe la probabilite de decoler de la ville i pour se rendre
+        vers la ville j.
+        Pour chaque ville i, on fait arriver des gens de toutes les villes j. On aura
+        aussi forcement un depart avec une probabilite PvoyageR de la population R de
+        la ville. D'ou le dernier calcul.
+        """
 
             #print "Ville : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i]
 
@@ -406,9 +435,8 @@ class worldCities:
                         cumulTauxR[i] += tR_old[j]*self.population[j]*self.pVoyR[j][0]*self.fly[i][j] #*100*100
                         cumulpopR[i] += self.population[j]*self.pVoyR[j][0]*self.fly[i][j]
                        
-        
-                                                                                                                                                                                                                                        
         for c in self.indice :
+            
             self.I[c] = (tI_old[c]*self.population[c] + cumulTauxI[c])/(self.population[c]+cumulpopI[c])* self.population[c]
             self.R[c] = (tR_old[c]*self.population[c] + cumulTauxR[c])/(self.population[c]+cumulpopR[c])* self.population[c]
 
@@ -486,6 +514,7 @@ class worldCities:
                 self.pVoyI[closedAirportsIndex[i][0]][0] = self.pVoyI[closedAirportsIndex[i][0]][0]*0.01 #Réduction de 90% du trafic des infectes            
                                     
             elif closedAirportsIndex[i][1]==3:
+
 
                 self.pVoyS[closedAirportsIndex[i][0]][0]=0
                 self.pVoyI[closedAirportsIndex[i][0]][0]=0
@@ -609,8 +638,9 @@ closedAirportsIndex=[['Paris',0,0.1],['Berlin',0,0.1],['Singapore',0,0.1],['Lond
 fold=open("Globaldata.txt","w")
 fold.writelines("Population mondiale\t S \t I \t R \t t \n")
 
+
 #worldmap.density_infected[0]=1.2
-#worldmap.maps(0.01)
+#worldmap.maps(s.alpha,s.tc)
 
 fich=open("OutputPopulations.txt","w")
 fich.writelines("Name\t S \t I \t R \t Total \t Time \n  \n")
@@ -621,6 +651,7 @@ for i in xrange(s.Tsim): #20 iterations dans lesquelles on a 5 iterations d'infe
     
 	print "ITERATION ",i+1
 
+
 	#worldmap.death(s.PdR,s.PdI,s.PdS)
 	#worldmap.birth(s.PbR,s.PbI,s.PbS)
 
@@ -628,10 +659,12 @@ for i in xrange(s.Tsim): #20 iterations dans lesquelles on a 5 iterations d'infe
 
 	worldmap.transportbis(StudiedCitiesVoy,i) #Mouvement des populations par transport
 
+	
 	worldPopulation=0
 	S_=0
 	I_=0
 	R_=0
+
 	for j in worldmap.indice:
 		worldPopulation+=worldmap.R[j]+worldmap.I[j]+worldmap.S[j]
 		S_+=worldmap.S[j]
@@ -641,11 +674,15 @@ for i in xrange(s.Tsim): #20 iterations dans lesquelles on a 5 iterations d'infe
 	fold.writelines(content)
 	#print worldPopulation
 
+
+     
+	
+	
 	for j in worldmap.indice:
 	    fich=open("OutputPopulations.txt","a")
 	    contenu=str(worldmap.name[j])+'\t'+str(worldmap.S[j])+'\t'+str(worldmap.I[j])+'\t'+str(worldmap.R[j])+'\t'+str(worldmap.R[j]+worldmap.I[j]+worldmap.S[j])+'\t'+str(i)+'\n';
 	    fich.writelines(contenu)
 	fich.writelines('\n')
 	fich.close()
-
+#worldmap.maps(s.alpha,s.tc)
 ################################################################################
