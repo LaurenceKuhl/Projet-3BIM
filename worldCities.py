@@ -129,7 +129,6 @@ class worldCities:
         self.I[ind]=0.001              #Infecte 10 personnes dans la ville 0
         self.S[ind]=self.S[ind]-0.001
         self.density_infected[ind] = float(self.I[ind]) / self.population[ind]
-#        print self.population[ind]
 
         # self.I[1]=10              #Infecte 10 personnes dans la ville 0
         # self.S[1]=self.S[1]-10
@@ -223,6 +222,9 @@ class worldCities:
         contenu=str(self.S[indiceVille])+'\t'+str(self.I[indiceVille])+'\t'+str(self.R[indiceVille])+'\t'+str(self.R[indiceVille]+self.I[indiceVille]+self.S[indiceVille])+'\t'+str(iternumber)+'\n';
         fich.writelines(contenu)
         fich.writelines('\n')
+        
+        
+        
 
     
     #####################################################################################
@@ -300,6 +302,7 @@ class worldCities:
             sauvegardeI.append(self.I[i])
             sauvegardeS.append(self.S[i])
 
+        
         ##### Population mouvements #####        
         """
         Chaque etat S, I et R a sa propre probabilite de voyage pour l'instant.
@@ -348,6 +351,7 @@ class worldCities:
         aussi forcement un depart avec une probabilite PvoyageR de la population R de
         la ville. D'ou le dernier calcul.
         """
+
 
             #print "Ville : ",self.name[i]," S=",self.S[i]," I=",self.I[i]," R=",self.R[i]
 
@@ -423,7 +427,7 @@ class worldCities:
                         #Voyage des R
                         #cumulTauxR[j] += tR_old[i]*self.population[i]*self.pVoyR[i][0]*self.fly[i][j]
                         #cumulpopR[j] += self.population[i]*self.pVoyR[i][0]*self.fly[i][j]
-                    
+
                     else :
                         #Voyage des S
                         #cumulTauxS[i] += tS_old[j]*self.population[j]*self.pVoyS[j][0]*self.fly[i][j]
@@ -435,6 +439,7 @@ class worldCities:
                         cumulTauxR[i] += tR_old[j]*self.population[j]*self.pVoyR[j][0]*self.fly[i][j] #*100*100
                         cumulpopR[i] += self.population[j]*self.pVoyR[j][0]*self.fly[i][j]
                        
+
         for c in self.indice :
             
             self.I[c] = (tI_old[c]*self.population[c] + cumulTauxI[c])/(self.population[c]+cumulpopI[c])* self.population[c]
@@ -685,4 +690,5 @@ for i in xrange(s.Tsim): #20 iterations dans lesquelles on a 5 iterations d'infe
 	fich.writelines('\n')
 	fich.close()
 #worldmap.maps(s.alpha,s.tc)
+
 ################################################################################
